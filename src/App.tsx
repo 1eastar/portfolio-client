@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 
-function App() {
+import AuthContext from './contexts/AuthContext';
+import Header from './components/basic/Header';
+import Footer from './components/basic/Footer';
+import Main from './pages/Main';
+import Info from './pages/Info';
+import Experience from './pages/Experience';
+import ExperienceDetial from './pages/ExperienceDetail';
+import Study from './pages/Study';
+import StudyDetail from './pages/StudyDetail';
+
+const App: React.FC = () => {
+  const [user, setUser] = useState({});
+  const [auth, setAuth] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AuthContext.Provider value={{
+        user, setUser, auth, setAuth
+      }}>
+        <Header/>
+        <Switch>
+          <Route exact={true} path='/' component={Main} />
+          <Route path='/info' component={Info} />
+          <Route path='/experiences' component={Experience} />
+          <Route path='/experience/:id' component={ExperienceDetial} />
+          <Route path='/studies' component={Study} />
+          <Route path='/study/:id' component={StudyDetail} />
+          {/* Not Found */}
+          <Route component={() => <Redirect to="/" />} />
+        </Switch>
+        <Footer/>
+      </AuthContext.Provider>
+    </BrowserRouter>
   );
 }
 
