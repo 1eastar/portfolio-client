@@ -5,6 +5,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import styled from 'styled-components';
 
 import AuthContext from './contexts/AuthContext';
 import Header from './components/basic/Header';
@@ -27,8 +28,8 @@ const App: React.FC = () => {
       }}>
         <Header/>
         <Switch>
-          <Route exact={true} path='/' component={Main} />
-          <Route path='/info' component={Info} />
+          {/* <Route exact={true} path='/' component={Main} /> */}
+          <Route exact={true}  path='/' component={Info} />
           <Route path='/experiences' component={Experience} />
           <Route path='/experience/:id' component={ExperienceDetial} />
           <Route path='/studies' component={Study} />

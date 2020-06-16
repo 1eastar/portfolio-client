@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 const Wrapper = styled.div`
-
+    min-height: ${window.innerHeight}px;
 `;
 
 interface IProps {
@@ -14,7 +14,7 @@ const Study: React.FC<IProps> = () => {
 
     return (
         <Wrapper>
-            
+
         </Wrapper>
     )
 }

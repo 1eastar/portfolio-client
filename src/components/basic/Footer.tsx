@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { measure } from '../../common/common';
 
 const Wrapper = styled.div`
+    /* position: relative; */
     width: ${measure.WIDTH}px;
     height: 25px;
     background-color: #353535;
@@ -11,8 +12,7 @@ const Wrapper = styled.div`
     color: #ffffff;
     text-align: center;
     line-height: 2;
-    position: absolute;
-    bottom: 0;
+    margin-top: 20px;
 `;
 
 const Purple = styled.span`

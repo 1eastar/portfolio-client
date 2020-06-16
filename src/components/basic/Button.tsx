@@ -21,7 +21,7 @@ interface ButtonProps {
     width: string,
     height: string,
     borderRadius: string,
-    backgroundColor: string,
+    backgroundColor: any,
     color: string,
     border: string,
     fontWeight: string,

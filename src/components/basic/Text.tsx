@@ -8,9 +8,11 @@ const Text = styled.div<{
     fontWeight: string,
     lineHeight?: string,
     width?: string,
+    color?: string,
 }>`
     width: ${p => p.width};
     font-size: ${(p) => p.fontSize};
+    color: ${p => p.color? p.color : '#303030'};
     font-stretch: normal;
     font-style: normal;
     font-weight: ${(p) => p.fontWeight};
