@@ -23,12 +23,17 @@ const Wrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+    float: left;
     height: auto;
-    width: ${measure.MAIN_WIDTH}px;
+    width: 1200px;
+    @media screen and (max-width: 1200px) {
+        width: 95%;
+    }
 `;
 
 const PhototextWrapper = styled.div<{index: string}>`
-    width: ${measure.MAIN_WIDTH}px;
+    float: left;
+    width: 1200px;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -51,14 +56,26 @@ const PhototextWrapper = styled.div<{index: string}>`
             }
         `
         : null}
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+    }
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        flex-direction: column;
+    }
 `;
 
 const TextWrapper = styled.div`
     width: 45%;
     height: auto;
+    float: left;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 const Img = styled.img`
+    float: left;
     width: 45%;
     height: auto;
     border-radius: 10px;
@@ -66,6 +83,9 @@ const Img = styled.img`
     cursor: zoom-in;
     &:active {
         transform: scale(1.2);
+    }
+    @media screen and (max-width: 768px) {
+        width: 100%;
     }
 `;
 

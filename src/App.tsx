@@ -17,29 +17,38 @@ import ExperienceDetial from './pages/ExperienceDetail';
 import Study from './pages/Study';
 import StudyDetail from './pages/StudyDetail';
 
+const AppWrapper = styled.div`
+  &,
+  & * {
+    box-sizing: border-box;
+  }
+`;
+
 const App: React.FC = () => {
   const [user, setUser] = useState({});
   const [auth, setAuth] = useState(false);
 
   return (
-    <BrowserRouter>
-      <AuthContext.Provider value={{
-        user, setUser, auth, setAuth
-      }}>
-        <Header/>
-        <Switch>
-          {/* <Route exact={true} path='/' component={Main} /> */}
-          <Route exact={true}  path='/' component={Info} />
-          <Route path='/experiences' component={Experience} />
-          <Route path='/experience/:id' component={ExperienceDetial} />
-          <Route path='/studies' component={Study} />
-          <Route path='/study/:id' component={StudyDetail} />
-          {/* Not Found */}
-          <Route component={() => <Redirect to="/" />} />
-        </Switch>
-        <Footer/>
-      </AuthContext.Provider>
-    </BrowserRouter>
+    <AppWrapper>
+      <BrowserRouter>
+        <AuthContext.Provider value={{
+          user, setUser, auth, setAuth
+        }}>
+          <Header/>
+          <Switch>
+            {/* <Route exact={true} path='/' component={Main} /> */}
+            <Route exact={true}  path='/' component={Info} />
+            <Route path='/experiences' component={Experience} />
+            <Route path='/experience/:id' component={ExperienceDetial} />
+            <Route path='/studies' component={Study} />
+            <Route path='/study/:id' component={StudyDetail} />
+            {/* Not Found */}
+            <Route component={() => <Redirect to="/" />} />
+          </Switch>
+          <Footer/>
+        </AuthContext.Provider>
+      </BrowserRouter>
+    </AppWrapper>
   );
 }
 

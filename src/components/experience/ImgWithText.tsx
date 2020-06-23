@@ -3,10 +3,21 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     position: relative;
+    float: left;
+    padding: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     width: 100%;
     height: auto;
     cursor: pointer;
     filter: brightness(90%);
+    border-radius: 20px;
+    
+`;
+
+const Img = styled.img`
+    float: left;
+    width: 100%;
     border-radius: 20px;
     /* -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s, bottom 2s; */
     transition: width 2s, height 2s, background-color 2s, transform .5s, bottom 2s;
@@ -19,13 +30,9 @@ const Wrapper = styled.div`
     }
 `;
 
-const Img = styled.img`
-    width: 100%;
-    border-radius: 20px;
-`;
-
 const Text = styled.div<{color?: string, fontSize?: string, fontWeight?: string, letterSpacing?: string}>`
     position: absolute;
+    float: left;
     width: 100%;
     color: ${p=>p.color};
     font-size: ${p=>p.fontSize};
@@ -34,6 +41,12 @@ const Text = styled.div<{color?: string, fontSize?: string, fontWeight?: string,
     top: 48%;
     left: 0%;
     text-align: center;
+    @media screen and (max-width: 768px) {
+        font-size: ${p=>parseFloat(p.fontSize!.split('px')[0])/3*2}px;
+    }
+    @media screen and (max-width: 600px) {
+        font-size: ${p=>p.fontSize};
+    }
 `;
 
 interface IProps {

@@ -11,7 +11,9 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-js-pagination": "^3.0.3",
     "@types/react-modal": "^3.10.5",
+    "@types/react-paginate": "^6.2.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/universal-cookie": "^2.2.0",
@@ -19,7 +21,10 @@
     "react": "^16.13.1",
     "react-awesome-modal": "^2.0.5",
     "react-dom": "^16.13.1",
+    "react-js-pagination": "^3.0.3",
     "react-modal": "^3.11.2",
+    "react-paginate": "^6.3.2",
+    "react-pagination": "^1.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
@@ -30,7 +35,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://portfolio-client --profile=portfolio",
+    "cloudfront": "aws cloudfront create-invalidation --profile=portfolio --distribution-id E2RXKES94T9NS8 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "eslintConfig": {
     "extends": "react-app"

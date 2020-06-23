@@ -9,6 +9,17 @@ const Wrapper = styled.div<{posY: number}>`
     right: 100px;
     /* top: ${p=>p.posY}px; */
     top: 150px;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+    @media screen and (max-width: 992px) {
+        right: 70px;
+        left: auto;
+    }
+    @media screen and (max-width: 1200px) {
+        right: 30px;
+        left: auto;
+    }
 `;
 
 const SubWrapper = styled.div`

@@ -19,6 +19,11 @@ const Text = styled.div<{
     line-height: normal;
     letter-spacing: ${(p) => p.letterSpacing};
     line-height: ${p => p.lineHeight};
+    float: left;
+
+    @media screen and (max-width: 600px) {
+        font-size: ${(p) => parseFloat(p.fontSize.split('px')[0])/3*2}px;
+    }
 `;
 
 export default Text;

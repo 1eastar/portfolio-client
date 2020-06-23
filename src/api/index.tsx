@@ -27,3 +27,7 @@ export const post = (link: string, data: object) => {
     const config = genAuthorizedHeader();
     return axios.post(url+link, data, config);
 }
+
+export const postWithoutToken = (link: string, data: object) => {
+    return axios.post(url+link, data);
+}

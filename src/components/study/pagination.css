@@ -1,0 +1,134 @@
+:root {
+    --big: 35px;
+    --mid: 30px;
+    --small: 25px;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    justify-content: center;
+    margin-top: 55px;
+  }
+  
+  .pagination li {
+    width: var(--big);
+    height: var(--big);
+    min-width: 15px;
+    min-height: 15px;
+    border-radius: 0.7px;
+    border: 1.3px solid #d1d1d1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.45px;
+  }
+  
+  .pagination li a {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: var(--big);
+    height: var(--big);
+  }
+  
+  .pagination li.previous {
+    list-style-type: none;
+    width: var(--big);
+  }
+  
+  .pagination li.next {
+    list-style-type: none;
+    width: var(--big);
+  }
+  
+  .pagination li.previous a {
+    width: var(--big);
+    height: var(--big);
+  }
+  
+  .pagination li.next a {
+    width: var(--big);
+    height: var(--big);
+  }
+  
+  .pagination a:focus {
+    outline: none;
+  }
+  
+  .pagination .selected {
+    background-color: #404040;
+    opacity: 0.8;
+    border: 1.3px solid #404040;
+    color: white;
+  }
+
+
+@media ( max-width: 1000px ) {
+    .pagination li {
+        width: var(--mid);
+        height: var(--mid);
+        font-size: 13px;
+    }
+    .pagination li a {
+        width: var(--mid);
+        height: var(--mid);
+    }
+    .pagination li a {
+        width: var(--mid);
+        height: var(--mid);
+    }
+    .pagination li.previous {
+        width: var(--mid);
+        height: var(--mid);
+    }
+    .pagination li.previous a {
+        width: var(--mid);
+        height: var(--mid);
+    }
+    .pagination li.next {
+        width: var(--mid);
+        height: var(--mid);
+    }
+    .pagination li.next a {
+        width: var(--mid);
+        height: var(--mid);
+    }
+}
+@media ( max-width: 600px ) {
+    .pagination li {
+        width: var(--small);
+        height: var(--small);
+        font-size: 12px;
+    }
+    .pagination li a {
+        width: var(--small);
+        height: var(--small);
+    }
+    .pagination li a {
+        width: var(--small);
+        height: var(--small);
+    }
+    .pagination li.previous {
+        width: var(--small);
+        height: var(--small);
+    }
+    .pagination li.previous a {
+        width: var(--small);
+        height: var(--small);
+    }
+    .pagination li.next {
+        width: var(--small);
+        height: var(--small);
+    }
+    .pagination li.next a {
+        width: var(--small);
+        height: var(--small);
+    }
+}

@@ -19,30 +19,42 @@ const Wrapper = styled.div`
     &>:first-of-type {
         margin-top: 100px;
     }
+    @media screen and (max-width: 600px) {
+        &>:first-of-type {
+            margin-top: 50px;
+        }
+    }
 `;
 
 const ImgWrapper = styled.div`
-    width: ${measure.MAIN_WIDTH}px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    &> * + * {
-        margin-left: 10px;
+    float: left;
+    width: 100%;
+    @media screen and (min-width: 600px) {
+        &> * + * {
+            /* margin-left: 10px; */
+        }
+        &> * {
+            /* padding-right: 17px; */
+            border-right: dashed 1px #e5e5e5;
+        }
+        &>:last-of-type {
+            border-right: 0px;
+        }
     }
-    &> * {
-        padding-right: 17px;
-        border-right: dashed 1px #e5e5e5;
-    }
-    &>:last-of-type {
-        border-right: 0px;
+    @media screen and (min-width: 1200px) {
+        width: 1200px;
     }
 `;
 
 const ImgLineWrapper = styled.div`
-    width: 370px;   
+    float: left;
+    width: 33.333%;
     height: auto;
     &> * {
         margin-bottom: 5px;
+    }
+    @media screen and (max-width: 600px) {
+        width: 100%;
     }
 `;
 
@@ -93,6 +105,7 @@ const Experience: React.FC<IProps> = () => {
 
     useEffect(() => {
         getExperienceList().then(res => {
+            // console.log(res)
             if(res.data){
                 setPost(res.data);
                 divide_3_line(res.data);
@@ -109,51 +122,69 @@ const Experience: React.FC<IProps> = () => {
                 Experiences
             </Text>
             <ImgWrapper>
-                <ImgLineWrapper>
-                    {line1.map((data, index) => {
+                {window.innerWidth < 600 && <ImgLineWrapper>
+                    {post.map((data, index) => {
                         return (
                             <ImgWithText
                                 key={index}
                                 src={data.main_image} 
                                 text={data.main_title} 
                                 color={'#353535'} 
-                                fontSize={"30px"} 
+                                fontSize={"25px"} 
                                 fontWeight={"800"} 
                                 letterSpacing={"-0.46px"}
                                 handler={()=>navigator(history, `/experience/${data.id}`)} />
                         )
                     })}
-                </ImgLineWrapper>
-                <ImgLineWrapper>
-                    {line2.map((data, index) => {
-                        return (
-                            <ImgWithText
-                                key={index}
-                                src={data.main_image} 
-                                text={data.main_title} 
-                                color={'#353535'} 
-                                fontSize={"30px"} 
-                                fontWeight={"800"} 
-                                letterSpacing={"-0.46px"}
-                                handler={()=>navigator(history, `/experience/${data.id}`)} />
-                        )
-                    })}
-                </ImgLineWrapper>
-                <ImgLineWrapper>
-                    {line3.map((data, index) => {
-                        return (
-                            <ImgWithText
-                                key={index}
-                                src={data.main_image} 
-                                text={data.main_title} 
-                                color={'#353535'} 
-                                fontSize={"30px"} 
-                                fontWeight={"800"} 
-                                letterSpacing={"-0.46px"}
-                                handler={()=>navigator(history, `/experience/${data.id}`)} />
-                        )
-                    })}
-                </ImgLineWrapper>
+                </ImgLineWrapper>}
+                {window.innerWidth > 600 && 
+                <>
+                    <ImgLineWrapper>
+                        {line1.map((data, index) => {
+                            return (
+                                <ImgWithText
+                                    key={index}
+                                    src={data.main_image} 
+                                    text={data.main_title} 
+                                    color={'#353535'} 
+                                    fontSize={"25px"} 
+                                    fontWeight={"800"} 
+                                    letterSpacing={"-0.46px"}
+                                    handler={()=>navigator(history, `/experience/${data.id}`)} />
+                            )
+                        })}
+                    </ImgLineWrapper>
+                    <ImgLineWrapper>
+                        {line2.map((data, index) => {
+                            return (
+                                <ImgWithText
+                                    key={index}
+                                    src={data.main_image} 
+                                    text={data.main_title} 
+                                    color={'#353535'} 
+                                    fontSize={"25px"} 
+                                    fontWeight={"800"} 
+                                    letterSpacing={"-0.46px"}
+                                    handler={()=>navigator(history, `/experience/${data.id}`)} />
+                            )
+                        })}
+                    </ImgLineWrapper>
+                    <ImgLineWrapper>
+                        {line3.map((data, index) => {
+                            return (
+                                <ImgWithText
+                                    key={index}
+                                    src={data.main_image} 
+                                    text={data.main_title} 
+                                    color={'#353535'} 
+                                    fontSize={"25px"} 
+                                    fontWeight={"800"} 
+                                    letterSpacing={"-0.46px"}
+                                    handler={()=>navigator(history, `/experience/${data.id}`)} />
+                            )
+                        })}
+                    </ImgLineWrapper>
+                </>}
             </ImgWrapper>
         </Wrapper>
     )
