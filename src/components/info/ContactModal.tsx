@@ -17,6 +17,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
+    border: none;
     &> * {
         align-self: flex-end;
     }
@@ -28,6 +29,7 @@ const Wrapper = styled.div`
 
 const FormWrapper = styled.div`
     width: 95%;
+    height: 70%;
     background-color: #fafafa;
     display: flex;
     flex-direction: column;
@@ -90,7 +92,8 @@ const ContentInput = styled.textarea`
     outline: none;
     vertical-align: top;
     width: 90%;
-    height: 300px;
+    /* height: 300px; */
+    height: 60%;
     overflow-y: scroll;
     white-space: pre-wrap;
     margin-top: 5px;
@@ -103,28 +106,28 @@ const ContentInput = styled.textarea`
         color: #aaaaaa;
     }
     @media screen and (max-width: 1200px) {
-        height: 300px;
+        /* height: 300px; */
         ::placeholder{
             font-size: 15px;
             color: #aaaaaa;
         }
     }
     @media screen and (max-width: 992px) {
-        height: 280px;
+        /* height: 280px; */
         ::placeholder{
             font-size: 15px;
             color: #aaaaaa;
         }
     }
     @media screen and (max-width: 768px) {
-        height: 250px;
+        /* height: 250px; */
         ::placeholder{
             font-size: 15px;
             color: #aaaaaa;
         }
     }
     @media screen and (max-width: 600px) {
-        height: 200px;
+        /* height: 200px; */
         ::placeholder{
             font-size: 15px;
             color: #aaaaaa;

@@ -21,6 +21,7 @@ const AppWrapper = styled.div`
   &,
   & * {
     box-sizing: border-box;
+    /* overflow: hidden; */
   }
 `;
 

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
-let ENV = 'dev';
-const url = ENV == 'dev' ? 'http://127.0.0.1:8000/' : '/';
+// let ENV = 'dev';
+let ENV = 'prod';
+const url = ENV == 'dev' ? 'http://127.0.0.1:8000/' : 'https://api.1eastar.com/';
 
 const genAuthorizedHeader = () => {
     const cookie = new Cookies();

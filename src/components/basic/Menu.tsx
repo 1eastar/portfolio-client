@@ -66,8 +66,8 @@ const Menu: React.FC<IProps> = ({
                 navigator(history, '/studies');
                 }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Study</Text>
             <Text onClick={() => {
-                closeHandler();
                 contactHandler();
+                closeHandler();
                 }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Contact</Text>
         </Wrapper>
     )

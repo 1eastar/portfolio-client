@@ -89,7 +89,7 @@ const Info: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
             </Text>
             <Echo width="70px" height="1px" backgrountColor="rgba(55,55,55,0.5)" />
             <Text fontWeight={'700'} fontSize={'15px'} letterSpacing={'-0.45px'}>
-                FRONTEND, WEB & DRF SERVER
+                FRONTEND, WEB with DRF & React
             </Text>
             <MakeRow>
                 {/* <Button 
@@ -130,7 +130,7 @@ const Info: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         fontSize: {large: '16px', small: '12px'},
                         margin: {large: 'margin-right: 10px;',small: 'margin-right: 3px;'}
                     }}
-                    text={'View Experiences'}
+                    text={'View More'}
                     handler={()=>navigator(history, '/experiences')}/>
                 <ButtonGrid 
                     styleParams={{

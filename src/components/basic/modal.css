@@ -9,7 +9,7 @@
     right: auto;
     bottom: auto; */
     padding: 0;
-    border: 0px;
+    border: none;
 }
 @media screen and (max-width: 1200px) {
     .modal {
@@ -38,9 +38,9 @@
 @media screen and (max-width: 600px) {
     .modal {
         width: 90%;
-        height: 70%;
+        height: 80%;
         margin-left: 5%;
-        margin-top: 30%;
+        margin-top: 15%;
     }
 }
 /* ReactModal__Content ReactModal__Content--after-open */

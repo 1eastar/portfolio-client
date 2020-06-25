@@ -50,6 +50,7 @@ const ImgLineWrapper = styled.div`
     float: left;
     width: 33.333%;
     height: auto;
+    overflow: visible;
     &> * {
         margin-bottom: 5px;
     }

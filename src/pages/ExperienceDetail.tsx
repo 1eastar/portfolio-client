@@ -26,6 +26,7 @@ const ContentWrapper = styled.div`
     float: left;
     height: auto;
     width: 1200px;
+    overflow: visible;
     @media screen and (max-width: 1200px) {
         width: 95%;
     }
@@ -53,6 +54,7 @@ const PhototextWrapper = styled.div<{index: string}>`
                 font-size: 70px;
                 font-weight: 800;
                 color: #eeeeee;
+                overflow: visible;
             }
         `
         : null}
@@ -62,6 +64,13 @@ const PhototextWrapper = styled.div<{index: string}>`
     @media screen and (max-width: 768px) {
         width: 100%;
         flex-direction: column;
+        ${p => p.index
+            ? css`
+                &::before {
+                    content: "";
+                }
+            `
+            : null}
     }
 `;
 
@@ -105,6 +114,7 @@ const ExperienceDetail: React.FC<RouteComponentProps<IProps>> = ({ match }) => {
                 setPost(res.data);
                 getPhototextInPost(res.data.id).then(res => {
                     //
+                    console.log(res)
                     if(res.data){
                         setPhototexts(res.data);
                     }
@@ -143,8 +153,8 @@ const ExperienceDetail: React.FC<RouteComponentProps<IProps>> = ({ match }) => {
                 {phototexts.map((data, index) => {
                     return (
                         <PhototextWrapper ref={refs[data.id]} index={index+1+''} key={index}>
-                            {data.image && <Img src={measure.SERVER_URL+data.image} />}
-                            <TextWrapper dangerouslySetInnerHTML={ {__html: '<p>hihi</p>'} }></TextWrapper>
+                            {data.image && <Img src={data.image} />}
+                            <TextWrapper dangerouslySetInnerHTML={ {__html: data.content} }></TextWrapper>
                         </PhototextWrapper>
                     )
                 })}

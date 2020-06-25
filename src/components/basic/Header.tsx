@@ -94,6 +94,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
     },[location])
 
     const OpenContactModal = () => {
+        console.log('contact open');
         setContactModal(true);
     }
 
@@ -122,7 +123,9 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
                 </Modal>
                 <WrapperForInfo>
-                    <MenuIcon onClick={OpenMenuModal}/>
+                    <MenuIcon onClick={()=>{
+                        CloseContactModal();
+                        OpenMenuModal();}}/>
                 </WrapperForInfo>
             </>
         )
@@ -145,6 +148,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     isOpen={contactModal}
                     // onAfterOpen={afterOpenModal}
                     onRequestClose={CloseContactModal}
+                    style={customStyles}
                     contentLabel="Example Modal"
                     className="modal"
                     >
@@ -216,16 +220,19 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
 }
 
 const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)',
-    //   width: (window.innerWidth>900)?600:600,
-    //   height: (window.innerWidth>900)?700:700,
-      padding: 0,
+    // content : {
+    //   top                   : '50%',
+    //   left                  : '50%',
+    //   right                 : 'auto',
+    //   bottom                : 'auto',
+    //   marginRight           : '-50%',
+    //   transform             : 'translate(-50%, -50%)',
+    // //   width: (window.innerWidth>900)?600:600,
+    // //   height: (window.innerWidth>900)?700:700,
+    //   padding: 0,
+    // },
+    content: {
+        border: 0,
     }
   };
 

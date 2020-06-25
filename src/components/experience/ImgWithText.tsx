@@ -12,7 +12,9 @@ const Wrapper = styled.div`
     cursor: pointer;
     filter: brightness(90%);
     border-radius: 20px;
-    
+    &:hover{
+        filter: brightness(100%);
+    }
 `;
 
 const Img = styled.img`
