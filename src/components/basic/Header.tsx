@@ -10,36 +10,68 @@ import ButtonGrid from '../../components/basic/ButtonGrid';
 import Echo from '../../components/basic/Echo';
 import ContactModal from '../../components/info/ContactModal';
 import Menu from '../basic/Menu';
+import Icon from './Icon';
+import IconGrid from './IconGrid';
 
 import './modal.css';
 
 
 const Wrapper = styled.div`
-    position: sticky;
-    top:0;
-    z-index: 100;
-    width: 100%;
-    height: 75px;
-    background-color: rgba(55, 55, 55, 0.8);
-    margin-right: 50px;
-    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.26);
+    position: fixed;
+    left: 0;
+    /* z-index: 100; */
+    /* float: left; */
+    z-index: 10;
+    min-width: 320px;
+    width: 23%;
+    height: 100%;
+    min-height: 100%;
+    /* height: ${window.innerHeight}px; */
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.02);
     &> * + * {
         /* margin-left: 30px; */
     }
     @media screen and (max-width: 1200px) {
-        height: 75px;
+        position: static;
+        height: 450px;
+        min-height: 20%;
+        width: 100%;
+        /* height: 25%; */
     }
     @media screen and (max-width: 992px) {
-        height: 70px;
+        /* height: 25%; */
     }
     @media screen and (max-width: 768px) {
-        height: 65px;
+        position: static;
+        height: 450px;
+        min-height: 20%;
+        width: 100%;
     }
     @media screen and (max-width: 600px) {
-        height: 55px;
-        display: flex;
+        display: none;
+        /* height: 25%; */
+        /* display: flex;
         justify-content: flex-end;
-        align-items: center;
+        align-items: center; */
+    }
+`;
+
+const HeaderImgWrapper = styled.div`
+    float: left;
+    width: 100%;
+    height: 25%;
+    background: url('images/main_image.jpeg') no-repeat center center;
+    background-color: rgba(55, 55, 55, 0.1);
+    background-size: cover;
+    /* filter: brightness(70%); */
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    @media screen and (max-width: 1200px) {
+        height: 80%;
     }
 `;
 
@@ -60,19 +92,126 @@ const WrapperForInfo = styled.div`
     }
 `;
 
-const MenuIcon = styled.div`
-    background: url('images/ic_menu.png') no-repeat center center;
-    background-size: contain;
-    width: 25px;
-    height: 25px;
+const MobileHeader = styled.div<{isMenuModalOpen: boolean}>`
     display: none;
+    z-index: 100;
     @media screen and (max-width: 600px) {
-        display: block;
-        margin-right: 20px;
-        z-index: 100;
+        display: ${p => p.isMenuModalOpen? 'none': 'block'};
+        position: fixed;
+        top: 0;
+        padding: 15px 0 0 15px;
+        width: 100%;
+        height: 55px;
+        background-color: rgba(255,255,255,0.85);
     }
 `;
 
+const MenuIcon = styled.div`
+    background: url('images/ic_menu_black.png') no-repeat center center;
+    background-size: contain;
+    width: 35px;
+    height: 35px;
+    /* display: none; */
+    @media screen and (max-width: 600px) {
+        /* display: block; */
+        /* position: sticky;
+        top: 15px;
+        left: 15px; */
+        margin-right: 20px;
+    }
+`;
+
+const NaviWrapper = styled.div`
+    float: left;
+    width: 100%;
+    height: 75%;
+    margin-top: 50px;
+    padding-right: 30px;
+    padding-left: 25%;
+    &::after {
+        content: '';
+        opacity: none;
+        display: block;
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        border: solid 4px #ffffff;
+        background: url('images/profile_image.jpeg') no-repeat center center;
+        background-size: cover;
+        top: calc(25% - 50px);
+        left: calc(50% - 50px);
+        /* left: 50%; */
+    }
+    @media screen and (max-height: 700px) {
+        margin-top: 30px;
+    }
+    @media screen and (max-width: 1200px) {
+        padding-left: 0;
+        margin-top: 0px;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        &::after {
+            top: 310px;
+            /* left: 50%; */
+        }
+    }
+`;
+
+const MainText = styled.div`
+    float: left;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: NanumSquareRoundB;
+    color: white;
+`;
+
+const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean}>`
+    float: left;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: -0.3px;
+    width: 100%;
+    color: ${p=>p.isFocus?'#303030':'#cccccc'};
+    text-align: end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #dbdbdb;
+    cursor: pointer;
+    @media screen and (max-width: 1200px) {
+        ${p=>p.isTag?'display: none':null};
+        width: 20%;
+        border-bottom: none;
+        text-align: center;
+        margin: 35px 15px 0 15px;
+    }
+`;
+
+const IconWrapper = styled.div`
+    float: left;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly !important;
+    position: absolute;
+    left: 0;
+    bottom: 50px;
+    @media screen and (max-height: 600px) {
+        display: none;
+    }
+    @media screen and (max-width: 1200px) {
+        top: 0;
+        align-items: center;
+        width: 150px;
+        height: 70px;
+    }
+`;
+
+const Orange = styled.span`
+    color: #ec5621;
+`;
 
 interface IProps {
     pathname: string,
@@ -80,16 +219,21 @@ interface IProps {
 
 const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
     const history = useHistory();
-    const [isInfo, setIsInfo] = useState(false);
+    // const [isInfo, setIsInfo] = useState(false);
     const [contactModal, setContactModal] = useState(false);
     const [menuModal, setMenuModal] = useState(false);
+    const [focus, setFocus] = useState(1);
 
     useEffect(()=>{
         // console.log(location)
         if(location.pathname === "/"){
-            setIsInfo(true);
-        } else {
-            setIsInfo(false);
+            setFocus(0)
+        } else if(location.pathname === "/portfolio"){
+            setFocus(1)
+        } else if(location.pathname === "/posts"){
+            setFocus(2)
+        } else if(location.pathname === "/tags"){
+            setFocus(4)
         }
     },[location])
 
@@ -110,26 +254,34 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
         setMenuModal(false);
     }
 
-    if(isInfo){
-        return (
-            <>
-                <Modal
-                    isOpen={menuModal}
-                    // onAfterOpen={afterOpenModal}
-                    onRequestClose={CloseMenuModal}
-                    style={Styles}
-                    contentLabel="Example Modal"
-                    >
-                        <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
-                </Modal>
-                <WrapperForInfo>
-                    <MenuIcon onClick={()=>{
-                        CloseContactModal();
-                        OpenMenuModal();}}/>
-                </WrapperForInfo>
-            </>
-        )
+
+    const openLink = (url: string) => {
+        const win = window.open(url, '_blank');
+        if(win != null){
+            win.focus();
+        }
     }
+
+    // if(isInfo){
+    //     return (
+    //         <>
+    //             <Modal
+    //                 isOpen={menuModal}
+    //                 // onAfterOpen={afterOpenModal}
+    //                 onRequestClose={CloseMenuModal}
+    //                 style={Styles}
+    //                 contentLabel="Example Modal"
+    //                 >
+    //                     <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
+    //             </Modal>
+    //             <WrapperForInfo>
+    //                 <MenuIcon onClick={()=>{
+    //                     CloseContactModal();
+    //                     OpenMenuModal();}}/>
+    //             </WrapperForInfo>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
@@ -140,6 +292,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                 onRequestClose={CloseMenuModal}
                 style={Styles}
                 contentLabel="Example Modal"
+                // className="menu"
                 >
                     <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
             </Modal>
@@ -149,12 +302,63 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     // onAfterOpen={afterOpenModal}
                     onRequestClose={CloseContactModal}
                     style={customStyles}
+                    shouldFocusAfterRender={false}
+                    shouldCloseOnOverlayClick={false}
                     contentLabel="Example Modal"
                     className="modal"
                     >
                         <ContactModal closeHandler={CloseContactModal}/>
                 </Modal>
-                <ButtonGrid 
+                <HeaderImgWrapper>
+                    <MainText>
+                        <Orange>코딩</Orange>하는 예비 건물주
+                        {/* 코딩하는 <Orange>예비 건물주</Orange> */}
+                    </MainText>
+                </HeaderImgWrapper>
+
+                <NaviWrapper>
+                    <CategoryText isFocus={focus===1} onClick={() => {
+                        navigator(history, '/portfolio');
+                        setFocus(1);
+                        CloseContactModal();
+                    }}>
+                        Portfolio
+                    </CategoryText>
+                    <CategoryText isFocus={focus===2} onClick={() => {
+                        navigator(history, '/posts');
+                        setFocus(2);
+                        CloseContactModal();
+                    }}>
+                        Post
+                    </CategoryText>
+                    <CategoryText isTag={true} isFocus={focus===-1} onClick={() => {
+                        window.alert('준비 중입니다!');
+                        // navigator(history, '/');
+                        // setFocus(0);
+                        // CloseContactModal();
+                    }}>
+                        Tags
+                    </CategoryText>
+                    <CategoryText isFocus={focus===0} onClick={() => {
+                        navigator(history, '/');
+                        setFocus(0);
+                        CloseContactModal();
+                    }}>
+                        About
+                    </CategoryText>
+                    <CategoryText isFocus={focus===4} onClick={() => {
+                        // navigator(history, '/');
+                        // setFocus(4);
+                        OpenContactModal();
+                    }}>
+                        Contact
+                    </CategoryText>
+                    <IconWrapper>
+                        <IconGrid url={'ic_github_grey'} width={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} height={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} handler={()=>openLink('https://github.com/1eastar')} ishandler={true} float='left' />
+                        <IconGrid url={'ic_facebook_grey'} width={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} height={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} handler={()=>openLink('https://www.facebook.com/profile.php?id=100006896258332')} ishandler={true} />
+                    </IconWrapper>
+                </NaviWrapper>
+                {/* <ButtonGrid 
                     styleParams={{
                         width: {large: '11%', lm: '14.5%', mid: '16%', ms: '18%', small: '0px'},
                         height: {large: '70px', lm: '70px', ms: '60px', small: '50px'},
@@ -169,9 +373,6 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     }}
                     text={'contact'}
                     handler={OpenContactModal}/>
-                <MenuIcon onClick={()=>{
-                    CloseContactModal();
-                    OpenMenuModal();}}/>
                 <ButtonGrid 
                     styleParams={{
                         width: {large: '11%', lm: '14.5%', mid: '16%', ms: '18%', small: '0%'},
@@ -185,7 +386,9 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         float: 'right',
                     }}
                     text={'study'}
-                    handler={()=>navigator(history, '/studies')}/>
+                    handler={()=>{
+                        navigator(history, '/studies');
+                        CloseContactModal();}}/>
                 <ButtonGrid 
                     styleParams={{
                         width: {large: '13%', lm: '16.5%', mid: '17.5%', ms: '19%', small: '0%'},
@@ -198,8 +401,10 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         fontSize: {large: '28px', lm: '24px', mid: '20px', ms: '17px', small: '0px'},
                         float: 'right',
                     }}
-                    text={'Experience'}
-                    handler={()=>navigator(history, '/experiences')}/>
+                    text={'History'}
+                    handler={()=>{
+                        navigator(history, '/experiences');
+                        CloseContactModal();}}/>
                 <ButtonGrid 
                     styleParams={{
                         width: {large: '11%', lm: '14.5%', mid: '16%', ms: '18%', small: '00%'},
@@ -213,8 +418,15 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         float: 'right',
                     }}
                     text={'Home'}
-                    handler={()=>navigator(history, '/')}/>
+                    handler={()=>{
+                        navigator(history, '/');
+                        CloseContactModal();}}/> */}
             </Wrapper>
+            <MobileHeader isMenuModalOpen={menuModal}>
+                <MenuIcon onClick={()=>{
+                    CloseContactModal();
+                    OpenMenuModal();}}/> 
+            </MobileHeader>
         </>
     )
 }
@@ -240,9 +452,9 @@ const Styles = {
     content: {
         width: '60%',
         height: '100%',
-        top: '53px',
-        right: 0,
-        left: 'auto',
+        top: 0,
+        left: 0,
+        right: 'auto',
         bottom: 'auto',
     }
 }

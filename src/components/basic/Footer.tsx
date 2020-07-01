@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { measure } from '../../common/common';
 
 const Wrapper = styled.div`
-    /* position: relative; */
+    /* position: relative;
+    bottom: 0; */
     float: left;
     width: 100%;
     height: 25px;

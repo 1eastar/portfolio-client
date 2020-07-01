@@ -22,6 +22,20 @@ const AppWrapper = styled.div`
   & * {
     box-sizing: border-box;
     /* overflow: hidden; */
+    /* background-color: #202020; */
+    /* justify-content: center; */
+    /* float: left; */
+    /* min-height: 100%; */
+    /* height: 100%; */
+  }
+`;
+
+const MakeRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
@@ -38,11 +52,11 @@ const App: React.FC = () => {
           <Header/>
           <Switch>
             {/* <Route exact={true} path='/' component={Main} /> */}
-            <Route exact={true}  path='/' component={Info} />
-            <Route path='/experiences' component={Experience} />
+            <Route exact={true} path='/' component={Info} />
+            <Route path='/portfolio' component={Experience} />
             <Route path='/experience/:id' component={ExperienceDetial} />
-            <Route path='/studies' component={Study} />
-            <Route path='/study/:id' component={StudyDetail} />
+            <Route path='/posts' component={Study} />
+            <Route path='/post/:id' component={StudyDetail} />
             {/* Not Found */}
             <Route component={() => <Redirect to="/" />} />
           </Switch>

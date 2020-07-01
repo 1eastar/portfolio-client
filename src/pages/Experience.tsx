@@ -9,25 +9,37 @@ import { getExperienceList } from '../api/experience/experienceModule';
 import ImgWithText from '../components/experience/ImgWithText';
 
 const Wrapper = styled.div`
+    float: left;
+    position: relative;
+    padding-left: 23%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: ${window.innerHeight-100}px;
+    min-height: 1000px;
     &> * + * {
+        margin-top: 30px;
+    }
+    &> * + * + * {
         margin-top: 150px;
     }
     &>:first-of-type {
         margin-top: 100px;
     }
+    @media screen and (max-width: 1200px) {
+        padding: 0;
+    }
     @media screen and (max-width: 600px) {
         &>:first-of-type {
             margin-top: 50px;
         }
+        margin-top: 50px;
     }
 `;
 
 const ImgWrapper = styled.div`
     float: left;
+    /* width: 1000px; */
     width: 100%;
     @media screen and (min-width: 600px) {
         &> * + * {
@@ -42,7 +54,10 @@ const ImgWrapper = styled.div`
         }
     }
     @media screen and (min-width: 1200px) {
-        width: 1200px;
+        width: 900px;
+    }
+    @media screen and (min-width: 1300px) {
+        width: 1000px;
     }
 `;
 
@@ -51,11 +66,15 @@ const ImgLineWrapper = styled.div`
     width: 33.333%;
     height: auto;
     overflow: visible;
+    /* padding-right: 10px;
+    padding-left: 10px; */
     &> * {
         margin-bottom: 5px;
     }
     @media screen and (max-width: 600px) {
-        width: 100%;
+        width: 80%;
+        margin: 0 auto;
+        float: none;
     }
 `;
 
@@ -120,7 +139,10 @@ const Experience: React.FC<IProps> = () => {
     return (
         <Wrapper>
             <Text fontSize={'45px'} fontWeight={'800'} letterSpacing={'-0.50px'} color={'#464646'} >
-                Experiences
+                Portfolio
+            </Text>
+            <Text fontSize={'20px'} fontWeight={'600'} letterSpacing={'-0.30px'} color={'#464646'} >
+                ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴ
             </Text>
             <ImgWrapper>
                 {window.innerWidth < 600 && <ImgLineWrapper>
@@ -130,9 +152,9 @@ const Experience: React.FC<IProps> = () => {
                                 key={index}
                                 src={data.main_image} 
                                 text={data.main_title} 
-                                color={'#353535'} 
+                                color={data.main_title_color} 
                                 fontSize={"25px"} 
-                                fontWeight={"800"} 
+                                fontWeight={"900"} 
                                 letterSpacing={"-0.46px"}
                                 handler={()=>navigator(history, `/experience/${data.id}`)} />
                         )
@@ -147,24 +169,9 @@ const Experience: React.FC<IProps> = () => {
                                     key={index}
                                     src={data.main_image} 
                                     text={data.main_title} 
-                                    color={'#353535'} 
+                                    color={data.main_title_color} 
                                     fontSize={"25px"} 
-                                    fontWeight={"800"} 
-                                    letterSpacing={"-0.46px"}
-                                    handler={()=>navigator(history, `/experience/${data.id}`)} />
-                            )
-                        })}
-                    </ImgLineWrapper>
-                    <ImgLineWrapper>
-                        {line2.map((data, index) => {
-                            return (
-                                <ImgWithText
-                                    key={index}
-                                    src={data.main_image} 
-                                    text={data.main_title} 
-                                    color={'#353535'} 
-                                    fontSize={"25px"} 
-                                    fontWeight={"800"} 
+                                    fontWeight={"900"} 
                                     letterSpacing={"-0.46px"}
                                     handler={()=>navigator(history, `/experience/${data.id}`)} />
                             )
@@ -177,9 +184,24 @@ const Experience: React.FC<IProps> = () => {
                                     key={index}
                                     src={data.main_image} 
                                     text={data.main_title} 
-                                    color={'#353535'} 
+                                    color={data.main_title_color} 
                                     fontSize={"25px"} 
-                                    fontWeight={"800"} 
+                                    fontWeight={"900"} 
+                                    letterSpacing={"-0.46px"}
+                                    handler={()=>navigator(history, `/experience/${data.id}`)} />
+                            )
+                        })}
+                    </ImgLineWrapper>
+                    <ImgLineWrapper>
+                        {line2.map((data, index) => {
+                            return (
+                                <ImgWithText
+                                    key={index}
+                                    src={data.main_image} 
+                                    text={data.main_title} 
+                                    color={data.main_title_color} 
+                                    fontSize={"25px"} 
+                                    fontWeight={"900"} 
                                     letterSpacing={"-0.46px"}
                                     handler={()=>navigator(history, `/experience/${data.id}`)} />
                             )

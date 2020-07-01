@@ -15,26 +15,63 @@ import Icon from '../components/basic/Icon';
 import '../components/basic/modal.css';
 
 const Wrapper = styled.div`
-    min-height: ${window.innerHeight-85}px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 23%;
+    min-height: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     &> * {
-        margin-top: 5px;
-        margin-bottom: 5px;
+        /* margin-top: 5px;
+        margin-bottom: 5px; */
+    }
+    @media screen and (max-width: 1200px) {
+        padding: 0;
     }
 `;
 
-const MakeRow = styled.div`
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @media screen and (max-width: 600px) {
-        
+const BackgroundImg = styled.div`
+    background: url('images/ic_profile.jpeg') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    margin: 0 auto;
+    width: 70%;
+    height: 30%;
+    @media screen and (max-width: 1200px) {
+        width: 100%;
     }
+    @media screen and (max-width: 600px) {
+        width: 100%;
+    }
+`;
+
+const TextBox = styled.pre`
+    width: 800px;
+    height: auto;
+    line-height: 2;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    font-family: NanumSquareRoundB;
+    color: #454545;
+    white-space: pre-line;
+    overflow: auto;
+    @media screen and (max-width: 1200px) {
+        width: 90%;
+    }
+    @media screen and (max-width: 600px) {
+        width: 90%;
+    }
+`;
+
+const Highlight = styled.span`
+    color: #ec5621;
+    cursor: pointer;
 `;
 
 interface IProps {
@@ -71,85 +108,18 @@ const Info: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
 
     return (
         <Wrapper>
-            <Modal
-                isOpen={openModal}
-                // onAfterOpen={afterOpenModal}
-                onRequestClose={CloseModal}
-                contentLabel="Example Modal"
-                className="modal"
-                >
-                    <ContactModal closeHandler={CloseModal}/>
-            </Modal>
-            <Text fontWeight={'700'} fontSize={'20px'} letterSpacing={'-0.45px'}>
-                Dongjin Kang
-            </Text>
-            <Echo width="70px" height="1px" backgrountColor="rgba(55,55,55,0.5)" />
-            <Text fontWeight={'800'} fontSize={'45px'} letterSpacing={'-0.70px'}>
-                Web Developer
-            </Text>
-            <Echo width="70px" height="1px" backgrountColor="rgba(55,55,55,0.5)" />
-            <Text fontWeight={'700'} fontSize={'15px'} letterSpacing={'-0.45px'}>
-                FRONTEND, WEB with DRF & React
-            </Text>
-            <MakeRow>
-                {/* <Button 
-                    styleParams={{
-                        width: '182px',
-                        height: '62px',
-                        borderRadius: '0px',
-                        backgroundColor: 'rgba(55,55,55, 0.8)',
-                        color: '#fcfcfc',
-                        border: '0px',
-                        fontWeight: '900',
-                        fontSize: '16px',
-                    }}
-                    text={'View Experiences'}
-                    handler={()=>navigator(history, '/experiences')}/>
-                <Button 
-                    styleParams={{
-                        width: '180px',
-                        height: '60px',
-                        borderRadius: '0px',
-                        backgroundColor: null,
-                        color: 'rgba(55,55,55, 1)',
-                        border: 'solid 1px rgba(55,55,55, 0.8)',
-                        fontWeight: '900',
-                        fontSize: '17px',
-                    }}
-                    text={'Contact'}
-                    handler={OpenModal}/> */}
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '182px', small: '132px'},
-                        height: {large: '70px', small: '50px'},
-                        borderRadius: '0px',
-                        backgroundColor: 'rgba(55,55,55, 0.8)',
-                        color: '#fcfcfc',
-                        border: '0px',
-                        fontWeight: '900',
-                        fontSize: {large: '16px', small: '12px'},
-                        margin: {large: 'margin-right: 10px;',small: 'margin-right: 3px;'}
-                    }}
-                    text={'View More'}
-                    handler={()=>navigator(history, '/experiences')}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '180px', small: '130px'},
-                        height: {large: '70px', small: '50px'},
-                        borderRadius: '0px',
-                        backgroundColor: null,
-                        color: 'rgba(55,55,55, 1)',
-                        border: 'solid 1px rgba(55,55,55, 0.8)',
-                        fontWeight: '900',
-                        fontSize: {large: '17px', small: '13px'},
-                    }}
-                    text={'Contact'}
-                    handler={OpenModal}/>
-            </MakeRow>
-            <MakeRow>
-                <Icon handler={()=>openLink('https://github.com/1eastar')} url='ic_github' width='32px' height='32px' float='left' isCircle={true} ishandler={true} />
-                <Icon handler={()=>openLink('https://www.facebook.com/profile.php?id=100006896258332')} url='ic_facebook' width='30px' height='30px' float='left' isCircle={true} ishandler={true} />
-            </MakeRow>
+            <BackgroundImg />
+            <TextBox>
+                안녕하세요,<br/> 코드 하나로 건물주가 되고 싶은 개발자입니다.<br/><br/>
+                
+                우연히 Django를 통해 개발을 접한 후 무언가를 만드는 것이 재미있어 지금까지 오게 되었습니다.<br/>
+                '코딩하는 예비 건물주'에서 '코딩하는 건물주'가 되는 것이 꿈입니다!<br/>
+                # Django / React / React-Native / AWS / git <br/>
+                <br/><br/>
+                웹사이트: <Highlight onClick={()=>navigator(history, '/')}>www.1eastar.com</Highlight><br/>
+                Github: <Highlight onClick={()=>openLink('https://github.com/1eastar')}>github.com/1eastar</Highlight><br/>
+                Email: <Highlight onClick={()=>{}}>ehdwls6703@gmail.com</Highlight><br/>
+            </TextBox>
         </Wrapper>
     )
 }

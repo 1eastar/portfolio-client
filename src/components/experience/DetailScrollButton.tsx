@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
-const Wrapper = styled.div<{posY: number}>`
+const Wrapper = styled.div`
     position: fixed;
     scroll-behavior: smooth;
     width: 30px;
     height: auto;
-    right: 100px;
-    /* top: ${p=>p.posY}px; */
+    right: 90px;
     top: 150px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: none;
+        left: auto;
     }
     @media screen and (max-width: 992px) {
-        right: 70px;
+        display: none;
         left: auto;
     }
-    @media screen and (max-width: 1200px) {
-        right: 30px;
-        left: auto;
+    @media screen and (max-width: 768px) {
+        display: none;
     }
 `;
 
@@ -104,12 +103,13 @@ const DetailScrollButton: React.FC<IProps> = ({
         return window.innerHeight/2 >= top && window.innerHeight/2 <= top+height;
         // return true;
     }
+
     return (
-        <Wrapper posY={scrTop+300}>
+        <Wrapper>
             {numberset.map((number, index) => {
                 return (
-                    <SubWrapper>
-                        <Button onClick={()=>handler(index+1)} isFocus={isInViewPort(index+1)}>
+                    <SubWrapper key={index}>
+                        <Button onClick={()=>handler(index)} isFocus={isInViewPort(index)}>
                             {number+1}
                         </Button>
                         {number+1!=length && <SmallCircle />}

@@ -210,7 +210,7 @@ const ContactModal: React.FC<IProps> = ({
                     <Text fontWeight={'700'} fontSize={'15px'} letterSpacing={'-0.30px'} color={'#777777'}>From.</Text>
                     <WriterInput name='writer' onChange={(e: any)=>typing(e, 1)} placeholder='작성자' value={writer}/>
                     <Text fontWeight={'700'} fontSize={'15px'} letterSpacing={'-0.30px'} color={'#777777'}>To.</Text>
-                    <WriterInput name='me' onChange={()=>{}} placeholder='Dongjin Kang' disabled={true}/>
+                    <WriterInput name='me' onChange={()=>{}} placeholder='Eastar' disabled={true}/>
                 </MakeRow>
                 <Text fontWeight={'800'} fontSize={'17px'} letterSpacing={'-0.30px'} color={'#777777'}>Content</Text>
                 <ContentInput name='content' onChange={(e: any)=>typing(e, 2)} placeholder='회신이 필요한 경우 연락처를 남겨주세요.' value={content} />

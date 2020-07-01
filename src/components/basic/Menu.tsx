@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 101;
     /* justify-content: center; */
     &> * {
         align-self: flex-start;
@@ -59,12 +60,16 @@ const Menu: React.FC<IProps> = ({
                 }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Home</Text>
             <Text onClick={()=>{
                 closeHandler();
-                navigator(history, '/experiences');
-                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Experience</Text>
+                navigator(history, '/posts');
+                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Post</Text>
             <Text onClick={()=>{
                 closeHandler();
-                navigator(history, '/studies');
-                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Study</Text>
+                // navigator(history, '/studies');
+                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Tags</Text>
+            <Text onClick={() => {
+                closeHandler();
+                navigator(history, '/info');
+                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>About</Text>
             <Text onClick={() => {
                 contactHandler();
                 closeHandler();

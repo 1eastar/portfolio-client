@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
+import Header from '../components/basic/Header';
 import Text from '../components/basic/Text';
 import { navigator } from '../common/navigator';
 import { measure } from '../common/common';
@@ -9,22 +10,46 @@ import Button from '../components/basic/Button';
 import ButtonGrid from '../components/basic/ButtonGrid';
 import Icon from '../components/basic/Icon';
 import Pagination from '../components/study/Pagination';
+import ListBlock from '../components/study/ListBlock';
 
-import { getStudyList } from '../api/study/studyModule';
+import { getStudyList, getAllStudyList } from '../api/study/studyModule';
 
 
 const Wrapper = styled.div`
-    min-height: ${window.innerHeight-120}px;
+    position: relative;
+    min-height: 1000px;
+    /* padding: 0; */
+    padding-left: 23%;
+    width: 100%;
+    @media screen and (max-width: 1200px) {
+        padding: 0;
+    }
+`;
+
+const SubWrapper = styled.div`
+    /* float: left; */
+    width: 800px;
+    margin: 0 auto;
+    min-height: 880px;
+    /* height: 100%; */
+    /* position: relative; */
     display: flex;
     flex-direction: column;
     align-items: center;
     &>:first-of-type {
         margin-top: 100px;
     }
+    @media screen and (max-width: 1200px) {
+        
+    }
+    @media screen and (max-width: 800px) {
+        width: 90%;
+    }
     @media screen and (max-width: 600px) {
         &>:first-of-type {
             margin-top: 50px;
         }
+        padding-top: 50px;
     }
 `;
 
@@ -32,18 +57,21 @@ const MakeRow = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 `;
 
 const ButtonWrapper = styled.div`
     width: 100%;
-    margin-top: 100px;
+    margin-top: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end !important;
+    -webkit-justify-content: flex-end !important;
     @media screen and (max-width: 768px) {
         display: block;
         width: 80%;
         margin-left: 3%;
-        margin-top: 50px;
+        margin-top: 30px;
     }
     @media screen and (max-width: 600px) {
         margin-left: 3%;
@@ -52,7 +80,7 @@ const ButtonWrapper = styled.div`
 
 const ListWrapper = styled.div`
     float: left;
-    width: 1200px;
+    width: 100%;
     margin-top: 10px;
     @media screen and (max-width: 1200px) {
         width: 90%;
@@ -121,13 +149,13 @@ const ListContent = styled.div`
     }
     @media screen and (max-width: 600px) {
         display: block;
-        height: 40px;
+        height: 60px;
     }
 `;
 
 const ListContentItem = styled.div<{type: number, forMobile?: boolean}>`
     float: left;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.3px;
     color: rgba(55,55,55,0.8);
@@ -142,11 +170,11 @@ const ListContentItem = styled.div<{type: number, forMobile?: boolean}>`
     }}
     display: ${p => p.forMobile? 'none': 'block'};
     @media screen and (max-width: 600px) {
-        font-size: 10px;
+        font-size: 13px;
         ${p=>{
-            if(p.type==0) return `width: ${100/12*2}%;line-height: 40px;margin-left: 10px;font-weight: 400;`;
+            if(p.type==0) return `width: ${100/12*1.5}%;line-height: 60px;margin-left: 10px;font-weight: 400;`;
             if(p.type==1) return `width: ${100/12*2}%;`;
-            if(p.type==2) return `width: ${100/12*9}%;font-weight: 900;line-height: 25px;`;
+            if(p.type==2) return `width: ${100/12*9}%;font-weight: 900;line-height: 40px;font-size: 15px;`;
             if(p.type==3) return `width: ${100/12*2}%;`;
         }}
         display: ${p => p.forMobile? 'block': 'none'};
@@ -154,13 +182,14 @@ const ListContentItem = styled.div<{type: number, forMobile?: boolean}>`
 `;
 
 const SearchWrapper = styled.div`
-    width: 1200px;
+    width: 100%;
+    float: right;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
     padding-right: 50px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     @media screen and (max-width: 1200px) {
         width: 100%;
     }
@@ -187,18 +216,75 @@ const SearchInput = styled.input`
         color: #aaaaaa;
     }
     @media screen and (max-width: 1200px) {
-        width: 15%;
+        width: 75%;
     }
     @media screen and (max-width: 992px) {
-        width: 18%;
+        width: 78%;
     }
     @media screen and (max-width: 768px) {
-        width: 20%;
+        width: 80%;
     }
     @media screen and (max-width: 600px) {
         width: 90%;
     }
 `;
+
+const TypeWrapper = styled.div`
+    width: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 50px 0 50px 0;
+    @media screen and (max-width: 1200px) {
+        display: flex;
+        align-items: center;
+    padding: 0 0 0 30px;
+        /* justify-content: center; */
+    }
+`;
+
+const TypeClicker = styled.div<{focus: boolean}>`
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+    color: ${p => p.focus? 'rgba(55,55,55,1)':'rgba(55,55,55,0.5)'};
+    &:last-child {
+        &::after {
+            float: left;
+            width: 2px;
+            height: 2px;
+            border-radius: 2px;
+            margin: 9px 6px 0 6px;
+            background-color: #9199a4;
+            vertical-align: top;
+            content: '';
+        }
+    }
+    @media screen and (max-width: 600px) {
+        font-size: 17px;
+    }
+`;
+
+const MainText = styled.div`
+    font-size: 45px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #464646;
+    display: block;
+    float: left;
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+`;
+
+const ListBlockWrapper = styled.div`
+    float: left;
+    width: 100%;
+    margin: 50px 0 50px;
+`;
+
 
 interface IProps {
 
@@ -213,6 +299,7 @@ const Study: React.FC<IProps> = () => {
     const [pagination, setPagination] = useState(10);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
+    const [listType, setListType] = useState(0);
 
     useEffect(()=>{
         // get study list api
@@ -236,18 +323,66 @@ const Study: React.FC<IProps> = () => {
                 create_at: '20.02.02',
             }
         ]
+        if(listType === 0){
+            getAllStudyList(search, type, order, pagination).then(res => {
+                // console.log(res)
+                if(res.status === 200){
+                    setStudyList(res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } else {
+            getStudyList(search, page, type, order, pagination).then(res => {
+                // console.log(res)
+                if(res.status === 200){
+                    setStudyList(res.data.results);
+                    setStudyListLength(res.data.count);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+    },[listType, search, page, type, order, pagination])
 
-        getStudyList(search, page, type, order, pagination).then(res => {
-            // console.log(res)
-            if(res.status === 200){
-                setStudyList(res.data.results);
-                setStudyListLength(res.data.count);
+    const _infiniteList = () => {
+        if(listType === 0){
+            getStudyList(search, page+1, type, order, pagination).then(res => {
+                console.log(res)
+                if(res.status === 200){
+                    setStudyList([...studyList, ...res.data.results]);
+                    setStudyListLength(res.data.count);
+                    setPage(page+1);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+    }
+
+    const _infiniteScroll = () => {
+        console.log(listType)
+        if(listType === 0){
+            let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+            let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+            let clientHeight = document.documentElement.clientHeight;
+            console.log(scrollTop, clientHeight, scrollHeight)
+            if(scrollTop + clientHeight === scrollHeight){
+                _infiniteList();
             }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    },[search, page, type, order, pagination])
+        }
+    }
+
+    // useEffect(()=>{
+    //     window.addEventListener('scroll', _infiniteScroll);
+
+    //     return () => {
+    //         window.removeEventListener('scroll', _infiniteScroll);
+    //     }
+    // },[])
 
     const categoryIdToText = (id: number) => {
         if(id == 1) {
@@ -267,121 +402,155 @@ const Study: React.FC<IProps> = () => {
         setPage(page);
     }
 
+    const CategoryReset = () => {
+        //
+    }
+
     return (
         <Wrapper>
-            <Text fontSize={window.innerWidth>600?'45px':'35px'} fontWeight={'800'} letterSpacing={'-0.50px'} color={'#464646'} >
-                Study
-            </Text>
-            <ButtonWrapper>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
-                        height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
-                        borderRadius: '8px',
-                        backgroundColor: type==0? '#373737':null,
-                        color: type==0?'#ffffff':'rgba(55,55,55, 1)',
-                        border: 'solid 1px rgba(55,55,55, 0.8)',
-                        fontWeight: '900',
-                        fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
-                        margin: {large: 'margin: 7px;'},
-                    }}
-                    text={'All'}
-                    handler={()=>{
-                        setPage(1);
-                        setType(0);
-                    }}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
-                        height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
-                        borderRadius: '8px',
-                        backgroundColor: type==1? '#373737':null,
-                        color: type==1?'#ffffff':'rgba(55,55,55, 1)',
-                        border: 'solid 1px rgba(55,55,55, 0.8)',
-                        fontWeight: '900',
-                        fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
-                        margin: {large: 'margin: 7px;'},
-                        // margin: {large: 'margin-right: 10px;',small: 'margin-right: 3px;'}
-                    }}
-                    text={'Dev'}
-                    handler={()=>{
-                        setPage(1);
-                        setType(1);
-                    }}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
-                        height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
-                        borderRadius: '8px',
-                        backgroundColor: type==2? '#373737':null,
-                        color: type==2?'#ffffff':'rgba(55,55,55, 1)',
-                        border: 'solid 1px rgba(55,55,55, 0.8)',
-                        fontWeight: '900',
-                        fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
-                        margin: {large: 'margin: 7px;'},
-                        // margin: {large: 'margin-right: 10px;',small: 'margin-right: 3px;'}
-                    }}
-                    text={'Univ'}
-                    handler={()=>{
-                        setPage(1);
-                        setType(2);
-                    }}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
-                        height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
-                        borderRadius: '8px',
-                        backgroundColor: type==3? '#373737':null,
-                        color: type==3?'#ffffff':'rgba(55,55,55, 1)',
-                        border: 'solid 1px rgba(55,55,55, 0.8)',
-                        fontWeight: '900',
-                        fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
-                        margin: {large: 'margin: 7px;'},
-                        // margin: {large: 'margin-right: 10px;',small: 'margin-right: 3px;'}
-                    }}
-                    text={'Others'}
-                    handler={()=>{
-                        setPage(1);
-                        setType(3);
-                    }}/>
-            </ButtonWrapper>
-            <SearchWrapper>
-                <Icon url={'ic_search'} width='15px' height='15px' />
-                <SearchInput name='search' placeholder='search' value={search} onChange={(e)=>typing(e)} />
-            </SearchWrapper>
-            <ListWrapper>
-                <ListAttrWrapper>
-                    <ListAttrs type={0}>No.</ListAttrs>
-                    <ListAttrs type={1}>Category</ListAttrs>
-                    <ListAttrs type={2}>Title</ListAttrs>
-                    <ListAttrs type={3}>Update</ListAttrs>
-                    <ListAttrs forMobile={true} type={0}>No.</ListAttrs>
-                    <ListAttrs forMobile={true} type={1}>Category</ListAttrs>
-                    <ListAttrs forMobile={true} type={2}>Title</ListAttrs>
-                    <ListAttrs forMobile={true} type={3}>Update</ListAttrs>
-                </ListAttrWrapper>
-                <ListContentWrapper>
-                    {studyList.map((data, index) => {
-                        return (
-                            <ListContent onClick={()=>navigator(history, `/study/${data.id}`)}>
-                                <ListContentItem type={0}>{index+1}</ListContentItem>
-                                <ListContentItem type={1}>{categoryIdToText(data.category)}</ListContentItem>
-                                <ListContentItem type={2}>{data.title}</ListContentItem>
-                                <ListContentItem type={3}>{data.create_at.slice(2,10).replace(/-/g, '.')}</ListContentItem>
-                                <ListContentItem forMobile={true} type={0}>{index+1}</ListContentItem>
-                                <ListContentItem forMobile={true} type={2}>{data.title}</ListContentItem>
-                                <ListContentItem forMobile={true} type={1}>{categoryIdToText(data.category)}</ListContentItem>
-                                <ListContentItem forMobile={true} type={3}>{data.create_at.slice(2,10).replace(/-/g, '.')}</ListContentItem>
-                            </ListContent>
-                        )
-                    })}
-                </ListContentWrapper>
-            </ListWrapper>
-            <Pagination 
-                wholeCount={studyListLength}
-                count={5}
-                callback={changePage}
-                nowpage={page}/>
+            {/* <Header /> */}
+            <SubWrapper>
+                {/* <MainText>
+                    Posts
+                </MainText> */}
+                <MakeRow>
+                    <TypeWrapper>
+                        <TypeClicker focus={listType === 0} onClick={() => {
+                                setListType(0);
+                            }}>
+                            리스트
+                        </TypeClicker>
+                        <TypeClicker focus={listType === 1} onClick={() => {
+                                setListType(1);
+                                setPage(1);
+                            }}>
+                            카테고리
+                        </TypeClicker>
+                    </TypeWrapper>
+                    <SearchWrapper>
+                        <Icon url={'ic_search'} width='15px' height='15px' />
+                        <SearchInput name='search' placeholder='search' value={search} onChange={(e)=>typing(e)} />
+                    </SearchWrapper>
+                </MakeRow>
+                {listType===0 && 
+                    <ListBlockWrapper>
+                        {studyList.map((data, index) => {
+                                return (
+                                    <ListBlock key={index} post={data} />
+                                )
+                        })}  
+                    </ListBlockWrapper>}
+                {listType===1 && 
+                <>
+                    <ButtonWrapper>
+                        <ButtonGrid 
+                            styleParams={{
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
+                                borderRadius: '8px',
+                                backgroundColor: null,
+                                color: type==0?'#373737':'rgba(55,55,55, 0.5)',
+                                border: '',
+                                fontWeight: '900',
+                                fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
+                                margin: {large: 'margin: 7px;'},
+                                additionalStyle: type==0?'border-bottom: solid 1px rgba(55,55,55, 0.8);border-top: solid 1px rgba(55,55,55, 0.8);':'',
+                            }}
+                            text={'All'}
+                            handler={()=>{
+                                setPage(1);
+                                setType(0);
+                            }}/>
+                        <ButtonGrid 
+                            styleParams={{
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
+                                borderRadius: '8px',
+                                backgroundColor: null,
+                                color: type==1?'#373737':'rgba(55,55,55, 0.5)',
+                                border: '',
+                                fontWeight: '900',
+                                fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
+                                margin: {large: 'margin: 7px;'},
+                                additionalStyle: type==1?'border-bottom: solid 1px rgba(55,55,55, 0.8);border-top: solid 1px rgba(55,55,55, 0.8);':'',
+                            }}
+                            text={'Dev'}
+                            handler={()=>{
+                                setPage(1);
+                                setType(1);
+                            }}/>
+                        <ButtonGrid 
+                            styleParams={{
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
+                                borderRadius: '8px',
+                                backgroundColor: null,
+                                color: type==2?'#373737':'rgba(55,55,55, 0.5)',
+                                border: '',
+                                fontWeight: '900',
+                                fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
+                                margin: {large: 'margin: 7px;'},
+                                additionalStyle: type==2?'border-bottom: solid 1px rgba(55,55,55, 0.8);border-top: solid 1px rgba(55,55,55, 0.8);':'',
+                            }}
+                            text={'Univ'}
+                            handler={()=>{
+                                setPage(1);
+                                setType(2);
+                            }}/>
+                        <ButtonGrid 
+                            styleParams={{
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
+                                borderRadius: '8px',
+                                backgroundColor: null,
+                                color: type==3?'#373737':'rgba(55,55,55, 0.5)',
+                                border: '',
+                                fontWeight: '900',
+                                fontSize: {large: '17px', lm: '', mid: '', ms: '', small: '13px'},
+                                margin: {large: 'margin: 7px;'},
+                                additionalStyle: type==3?'border-bottom: solid 1px rgba(55,55,55, 0.8);border-top: solid 1px rgba(55,55,55, 0.8);':'',
+                            }}
+                            text={'Others'}
+                            handler={()=>{
+                                setPage(1);
+                                setType(3);
+                            }}/>
+                    </ButtonWrapper>
+                    <ListWrapper>
+                        <ListAttrWrapper>
+                            <ListAttrs type={0}>No.</ListAttrs>
+                            <ListAttrs type={1}>Category</ListAttrs>
+                            <ListAttrs type={2}>Title</ListAttrs>
+                            <ListAttrs type={3}>Update</ListAttrs>
+                            {/* <ListAttrs forMobile={true} type={0}>No.</ListAttrs>
+                            <ListAttrs forMobile={true} type={1}>Category</ListAttrs>
+                            <ListAttrs forMobile={true} type={2}>Title</ListAttrs>
+                            <ListAttrs forMobile={true} type={3}>Update</ListAttrs> */}
+                        </ListAttrWrapper>
+                        <ListContentWrapper>
+                            {studyList.map((data, index) => {
+                                return (
+                                    <ListContent key={index} onClick={()=>navigator(history, `/post/${data.id}`)}>
+                                        <ListContentItem type={0}>{data.id}</ListContentItem>
+                                        <ListContentItem type={1}>{categoryIdToText(data.category)}</ListContentItem>
+                                        <ListContentItem type={2}>{data.title}</ListContentItem>
+                                        <ListContentItem type={3}>{data.create_at.slice(2,10).replace(/-/g, '.')}</ListContentItem>
+                                        <ListContentItem forMobile={true} type={0}>{data.id}</ListContentItem>
+                                        <ListContentItem forMobile={true} type={2}>{data.title}</ListContentItem>
+                                        <ListContentItem forMobile={true} type={1}>{categoryIdToText(data.category)}</ListContentItem>
+                                        <ListContentItem forMobile={true} type={3}>{data.create_at.slice(2,10).replace(/-/g, '.')}</ListContentItem>
+                                    </ListContent>
+                                )
+                            })}
+                        </ListContentWrapper>
+                    </ListWrapper>
+                    <Pagination 
+                        wholeCount={studyListLength}
+                        count={pagination}
+                        callback={changePage}
+                        nowpage={page}/>
+                </>}
+            </SubWrapper>
         </Wrapper>
     )
 }

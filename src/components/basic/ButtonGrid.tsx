@@ -16,6 +16,8 @@ const ButtonWrapper = styled.div<{ styleParams: any }>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  outline: none;
+  ${p => p.styleParams.additionalStyle?p.styleParams.additionalStyle:null};
   float: ${(p) => p.styleParams.float?p.styleParams.float:'left'};
   ${(p) => p.styleParams.margin? p.styleParams.margin.large: null}
   @media screen and (max-width: 1200px) {
@@ -67,6 +69,7 @@ interface ButtonProps {
     float?: string,
     margin?: {large?: string, lm?: string, mid?: string, ms?: string, small?: string},
     isMenu?: boolean,
+    additionalStyle?: string,
   }
   text: string
   handler: () => void,

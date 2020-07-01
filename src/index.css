@@ -2,11 +2,39 @@ body {
   margin: 0;
   font-family: 'NanumSquare';
   font-weight: 400;
+  height: 100%;
+  min-height: 100%;
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
+}
+
+html {
+  height: 100%;
+  min-height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: "NanumSquareRoundB";
+  font-weight: 700;
+  src: url('./asset/fonts/NanumSquareRoundB.ttf') format("treutype"),
+}
+@font-face {
+  font-family: "NanumSquareRoundL";
+  font-weight: 300;
+  src: url('./asset/fonts/NanumSquareRoundL.ttf') format("treutype"),
+}
+@font-face {
+  font-family: "NanumSquareRoundR";
+  font-weight: 400;
+  src: url('./asset/fonts/NanumSquareRoundR.ttf') format("treutype"),
+}
+@font-face {
+  font-family: "NanumSquareRoundEB";
+  font-weight: 800;
+  src: url('./asset/fonts/NanumSquareRoundEB.ttf') format("treutype"),
 }
