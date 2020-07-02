@@ -324,7 +324,8 @@ const Study: React.FC<IProps> = () => {
             }
         ]
         if(listType === 0){
-            getAllStudyList(search, type, order, pagination).then(res => {
+            setType(0);
+            getAllStudyList(search, order, pagination).then(res => {
                 // console.log(res)
                 if(res.status === 200){
                     setStudyList(res.data);

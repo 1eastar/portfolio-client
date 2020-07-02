@@ -11,6 +11,7 @@ import { measure } from '../common/common';
 import Echo from '../components/basic/Echo';
 import ContactModal from '../components/info/ContactModal';
 import Icon from '../components/basic/Icon';
+import { openLink } from '../common/OpenLink';
 
 import '../components/basic/modal.css';
 
@@ -34,14 +35,14 @@ const Wrapper = styled.div`
 `;
 
 const BackgroundImg = styled.div`
-    background: url('images/ic_profile.jpeg') no-repeat center center;
+    background: url('images/info_background.jpeg') no-repeat center center;
     background-size: cover;
     position: absolute;
-    opacity: 0.5;
+    opacity: 0.3;
     top: 0;
     margin: 0 auto;
     width: 70%;
-    height: 30%;
+    height: 50%;
     @media screen and (max-width: 1200px) {
         width: 100%;
     }
@@ -58,7 +59,8 @@ const TextBox = styled.pre`
     font-weight: 500;
     letter-spacing: -0.4px;
     font-family: NanumSquareRoundB;
-    color: #454545;
+    color: #000000;
+    
     white-space: pre-line;
     overflow: auto;
     @media screen and (max-width: 1200px) {
@@ -99,26 +101,20 @@ const Info: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
     //     }
     // },[location])
 
-    const openLink = (url: string) => {
-        const win = window.open(url, '_blank');
-        if(win != null){
-            win.focus();
-        }
-    }
-
     return (
         <Wrapper>
             <BackgroundImg />
             <TextBox>
-                안녕하세요,<br/> 코드 하나로 건물주가 되고 싶은 개발자입니다.<br/><br/>
+                안녕하세요,<br/> 누가 시켜서가 아닌 정말 하고 싶어서, 재미있어서 개발을 하는 대학생입니다.<br/><br/>
                 
-                우연히 Django를 통해 개발을 접한 후 무언가를 만드는 것이 재미있어 지금까지 오게 되었습니다.<br/>
-                '코딩하는 예비 건물주'에서 '코딩하는 건물주'가 되는 것이 꿈입니다!<br/>
-                # Django / React / React-Native / AWS / git <br/>
+                우연히 Django를 접한 후 무언가를 직접 만드는 것이 재미있어 꾸준히 개발 공부를 하고 있습니다.<br/>
+                호호 할아버지가 되어서도 이제 취미가 된 개발을 계속하는 것이 꿈입니다<br/>
+                {/* '코딩하는 예비 건물주'에서 '코딩하는 건물주'가 되는 것이 꿈입니다!<br/> */}
+                # Django / React / React-Native <br/>
                 <br/><br/>
                 웹사이트: <Highlight onClick={()=>navigator(history, '/')}>www.1eastar.com</Highlight><br/>
                 Github: <Highlight onClick={()=>openLink('https://github.com/1eastar')}>github.com/1eastar</Highlight><br/>
-                Email: <Highlight onClick={()=>{}}>ehdwls6703@gmail.com</Highlight><br/>
+                Email: <Highlight style={{cursor: 'default'}} onClick={()=>{}}>ehdwls6703@gmail.com</Highlight><br/>
             </TextBox>
         </Wrapper>
     )

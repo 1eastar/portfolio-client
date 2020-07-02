@@ -100,7 +100,7 @@ const Img = styled.img<{vertical: boolean}>`
     transition: scale .5s;
     cursor: zoom-in;
     &:active {
-        transform: scale(1.2);
+        transform: scale(1.5);
     }
     @media screen and (max-width: 768px) {
         width: 100%;

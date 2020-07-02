@@ -18,7 +18,7 @@ const Wrapper = styled.div`
     align-items: center;
     min-height: 1000px;
     &> * + * {
-        margin-top: 30px;
+        margin-top: 20px;
     }
     &> * + * + * {
         margin-top: 150px;
@@ -141,8 +141,8 @@ const Experience: React.FC<IProps> = () => {
             <Text fontSize={'45px'} fontWeight={'800'} letterSpacing={'-0.50px'} color={'#464646'} >
                 Portfolio
             </Text>
-            <Text fontSize={'20px'} fontWeight={'600'} letterSpacing={'-0.30px'} color={'#464646'} >
-                ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴ
+            <Text fontSize={'15px'} fontWeight={'600'} letterSpacing={'-0.30px'} color={'#464646'} >
+                지금의 저를 만들어준 소중한 경험들입니다
             </Text>
             <ImgWrapper>
                 {window.innerWidth < 600 && <ImgLineWrapper>

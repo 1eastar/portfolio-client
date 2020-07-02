@@ -161,10 +161,13 @@ const NaviWrapper = styled.div`
 
 const MainText = styled.div`
     float: left;
-    font-size: 25px;
-    font-weight: 700;
+    font-size: 23px;
+    font-weight: 600;
     font-family: NanumSquareRoundB;
     color: white;
+    @media screen and (max-width: 1200px) {
+        font-size: 28px;
+    }
 `;
 
 const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean}>`
@@ -311,7 +314,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                 </Modal>
                 <HeaderImgWrapper>
                     <MainText>
-                        <Orange>코딩</Orange>하는 예비 건물주
+                        Web/APP <Orange>Developer</Orange>
                         {/* 코딩하는 <Orange>예비 건물주</Orange> */}
                     </MainText>
                 </HeaderImgWrapper>
