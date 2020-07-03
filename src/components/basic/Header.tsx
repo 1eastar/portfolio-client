@@ -295,6 +295,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                 onRequestClose={CloseMenuModal}
                 style={Styles}
                 contentLabel="Example Modal"
+                ariaHideApp={false}
                 // className="menu"
                 >
                     <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
@@ -309,6 +310,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     shouldCloseOnOverlayClick={false}
                     contentLabel="Example Modal"
                     className="modal"
+                    ariaHideApp={false}
                     >
                         <ContactModal closeHandler={CloseContactModal}/>
                 </Modal>

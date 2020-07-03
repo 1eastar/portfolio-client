@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 import Text from '../components/basic/Text';
+import TextGrid from '../components/basic/TextGrid';
 import { navigator } from '../common/navigator';
 import { measure } from '../common/common';
 import { getExperienceList } from '../api/experience/experienceModule';
@@ -61,7 +62,7 @@ const ImgWrapper = styled.div`
     }
 `;
 
-const ImgLineWrapper = styled.div`
+const ImgLineWrapper = styled.div<{forMobile: boolean}>`
     float: left;
     width: 33.333%;
     height: auto;
@@ -71,10 +72,20 @@ const ImgLineWrapper = styled.div`
     &> * {
         margin-bottom: 5px;
     }
+    ${p => p.forMobile
+        ? css`
+            display: none;
+        `
+        : null};
     @media screen and (max-width: 600px) {
         width: 80%;
         margin: 0 auto;
         float: none;
+        ${p => p.forMobile
+            ? css`
+                display: block;
+            `
+            : null};
     }
 `;
 
@@ -141,11 +152,11 @@ const Experience: React.FC<IProps> = () => {
             <Text fontSize={'45px'} fontWeight={'800'} letterSpacing={'-0.50px'} color={'#464646'} >
                 Portfolio
             </Text>
-            <Text fontSize={'15px'} fontWeight={'600'} letterSpacing={'-0.30px'} color={'#464646'} >
+            <TextGrid fontSize={{l:'17px', lm:'15px', s:'13px'}} fontWeight={{l:'600'}} letterSpacing={'-0.60px'} color={'#464646'} >
                 지금의 저를 만들어준 소중한 경험들입니다
-            </Text>
+            </TextGrid>
             <ImgWrapper>
-                {window.innerWidth < 600 && <ImgLineWrapper>
+                <ImgLineWrapper forMobile={true}>
                     {post.map((data, index) => {
                         return (
                             <ImgWithText
@@ -159,10 +170,10 @@ const Experience: React.FC<IProps> = () => {
                                 handler={()=>navigator(history, `/experience/${data.id}`)} />
                         )
                     })}
-                </ImgLineWrapper>}
-                {window.innerWidth > 600 && 
+                </ImgLineWrapper>
+                
                 <>
-                    <ImgLineWrapper>
+                    <ImgLineWrapper forMobile={false}>
                         {line1.map((data, index) => {
                             return (
                                 <ImgWithText
@@ -177,7 +188,7 @@ const Experience: React.FC<IProps> = () => {
                             )
                         })}
                     </ImgLineWrapper>
-                    <ImgLineWrapper>
+                    <ImgLineWrapper forMobile={false}>
                         {line3.map((data, index) => {
                             return (
                                 <ImgWithText
@@ -192,7 +203,7 @@ const Experience: React.FC<IProps> = () => {
                             )
                         })}
                     </ImgLineWrapper>
-                    <ImgLineWrapper>
+                    <ImgLineWrapper forMobile={false}>
                         {line2.map((data, index) => {
                             return (
                                 <ImgWithText
@@ -207,7 +218,7 @@ const Experience: React.FC<IProps> = () => {
                             )
                         })}
                     </ImgLineWrapper>
-                </>}
+                </>
             </ImgWrapper>
         </Wrapper>
     )

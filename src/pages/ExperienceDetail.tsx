@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { getExperienceDetail } from '../api/experience/experienceModule';
 import { getPhototextInPost } from '../api/experience/phototextModule';
 import Text from '../components/basic/Text';
+import TextGrid from '../components/basic/TextGrid';
 import { measure } from '../common/common';
 import Echo from '../components/basic/Echo';
 import DetailScorllButton from '../components/experience/DetailScrollButton';
@@ -89,6 +90,8 @@ const TextWrapper = styled.div<{vertical: boolean}>`
     ${p => p.vertical? css`width: 100%;`:css`width: 55%;`};
     @media screen and (max-width: 768px) {
         width: 100%;
+        margin-top: 15px;
+        padding: 0 15px 0 15px;
     }
 `;
 
@@ -103,7 +106,8 @@ const Img = styled.img<{vertical: boolean}>`
         transform: scale(1.5);
     }
     @media screen and (max-width: 768px) {
-        width: 100%;
+        width: 85%;
+        margin: 0 auto;
         &:active {
             transform: none;
         }
@@ -111,7 +115,7 @@ const Img = styled.img<{vertical: boolean}>`
 `;
 
 const MainContent = styled.div`
-    margin-bottom: 80px;
+    margin: 0 15px 80px 15px;
 `;
 
 interface IProps {
@@ -163,21 +167,21 @@ const ExperienceDetail: React.FC<RouteComponentProps<IProps>> = ({ match }) => {
     return (
         <Wrapper>
             <Echo height='50px'/>
-            <Text textAlign={'center'} fontSize={'45px'} fontWeight={'800'} letterSpacing={'-0.60px'} color={'#353535'} >
+            <TextGrid textAlign={'center'} fontSize={{l:'45px', s:'27px'}} fontWeight={{l:'800', s:'700'}} letterSpacing={'-0.60px'} color={'#353535'} >
                 {post.title}
-            </Text>
+            </TextGrid>
             {post.content && <MainContent dangerouslySetInnerHTML={ {__html: post.content} } />}
             <ContentWrapper>
                 {phototexts.map((data, index) => {
                     if(phototexts.length-1 == index){
                         return (
-                            <>
+                            <div key={index}>
                                 <PhototextWrapper vertical={data.vertical_mode} noUnderline={data.no_underline} ref={refs[data.number-1]} index={index+1+''} key={index}>
                                     {data.image && <Img src={data.image} vertical={data.vertical_mode} />}
                                     <TextWrapper vertical={data.vertical_mode} dangerouslySetInnerHTML={ {__html: data.content} }></TextWrapper>
                                 </PhototextWrapper>
                                 <DetailScorllButton refs={refs} length={phototexts.length} handler={(id: number)=>scrollNavi(id)} />
-                            </>
+                            </div>
                         )
                     }
                     return (

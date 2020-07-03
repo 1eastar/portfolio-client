@@ -57,4 +57,12 @@
         margin-top: 10%;
     }
 }
+@media screen and (max-width: 450px) {
+    .modal {
+        width: 90%;
+        height: 80%;
+        margin-left: 5%;
+        margin-top: 15%;
+    }
+}
 /* ReactModal__Content ReactModal__Content--after-open */

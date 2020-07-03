@@ -56,8 +56,8 @@ const Menu: React.FC<IProps> = ({
             <Icon float="left" ishandler={true} handler={closeHandler} width='30px' height='30px' url='ic_close' />
             <Text onClick={()=>{
                 closeHandler();
-                navigator(history, '/');
-                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Home</Text>
+                navigator(history, '/portfolio');
+                }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Portfolio</Text>
             <Text onClick={()=>{
                 closeHandler();
                 navigator(history, '/posts');
@@ -68,7 +68,7 @@ const Menu: React.FC<IProps> = ({
                 }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>Tags</Text>
             <Text onClick={() => {
                 closeHandler();
-                navigator(history, '/info');
+                navigator(history, '/');
                 }} fontSize={'22px'} fontWeight={'600'} letterSpacing={'-0.40px'} color={'#404040'}>About</Text>
             <Text onClick={() => {
                 contactHandler();

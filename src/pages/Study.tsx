@@ -165,7 +165,7 @@ const ListContentItem = styled.div<{type: number, forMobile?: boolean}>`
     ${p=>{
         if(p.type==0) return `width: ${100/12}%;height: 100%;line-height: 50px;`;
         if(p.type==1) return `width: ${100/12*2}%;`;
-        if(p.type==2) return `width: ${100/12*7}%;`;
+        if(p.type==2) return `width: ${100/12*7}%;white-space: nowrap;padding-right: 20px;`;
         if(p.type==3) return `width: ${100/12*2}%;`;
     }}
     display: ${p => p.forMobile? 'none': 'block'};
@@ -173,9 +173,9 @@ const ListContentItem = styled.div<{type: number, forMobile?: boolean}>`
         font-size: 13px;
         ${p=>{
             if(p.type==0) return `width: ${100/12*1.5}%;line-height: 60px;margin-left: 10px;font-weight: 400;`;
-            if(p.type==1) return `width: ${100/12*2}%;`;
+            if(p.type==1) return `width: ${100/12*2}%;color: #ec5621;font-weight: 400;`;
             if(p.type==2) return `width: ${100/12*9}%;font-weight: 900;line-height: 40px;font-size: 15px;`;
-            if(p.type==3) return `width: ${100/12*2}%;`;
+            if(p.type==3) return `width: ${100/12*2.5}%;`;
         }}
         display: ${p => p.forMobile? 'block': 'none'};
     }
@@ -446,7 +446,7 @@ const Study: React.FC<IProps> = () => {
                     <ButtonWrapper>
                         <ButtonGrid 
                             styleParams={{
-                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '43%'},
                                 height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
                                 borderRadius: '8px',
                                 backgroundColor: null,
@@ -464,7 +464,7 @@ const Study: React.FC<IProps> = () => {
                             }}/>
                         <ButtonGrid 
                             styleParams={{
-                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '43%'},
                                 height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
                                 borderRadius: '8px',
                                 backgroundColor: null,
@@ -482,7 +482,7 @@ const Study: React.FC<IProps> = () => {
                             }}/>
                         <ButtonGrid 
                             styleParams={{
-                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '43%'},
                                 height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
                                 borderRadius: '8px',
                                 backgroundColor: null,
@@ -500,7 +500,7 @@ const Study: React.FC<IProps> = () => {
                             }}/>
                         <ButtonGrid 
                             styleParams={{
-                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '45%'},
+                                width: {large: '170px', lm: '', mid: '', ms: '45%', small: '43%'},
                                 height: {large: '60px', lm: '', mid: '', ms: '45px', small: '40px'},
                                 borderRadius: '8px',
                                 backgroundColor: null,
