@@ -14,6 +14,9 @@ import Icon from './Icon';
 import IconGrid from './IconGrid';
 
 import './modal.css';
+import HeaderMainImg from '../../asset/images/main_image.jpeg';
+import HeaderProfileImg from '../../asset/images/profile_image.jpeg';
+import HeaderMenuIcon from '../../asset/images/ic_menu_black.png';
 
 
 const Wrapper = styled.div`
@@ -60,7 +63,10 @@ const HeaderImgWrapper = styled.div`
     float: left;
     width: 100%;
     height: 25%;
-    background: url('images/main_image.jpeg') no-repeat center center;
+    /* background: url('images/main_image.jpeg') no-repeat center center; */
+    background-image: url(${HeaderMainImg});
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: rgba(55, 55, 55, 0.1);
     background-size: cover;
     /* filter: brightness(70%); */
@@ -107,7 +113,10 @@ const MobileHeader = styled.div<{isMenuModalOpen: boolean}>`
 `;
 
 const MenuIcon = styled.div`
-    background: url('images/ic_menu_black.png') no-repeat center center;
+    /* background: url('images/ic_menu_black.png') no-repeat center center; */
+    background-image: url(${HeaderMenuIcon});
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: contain;
     width: 35px;
     height: 35px;
@@ -137,7 +146,10 @@ const NaviWrapper = styled.div`
         height: 96px;
         border-radius: 50%;
         border: solid 4px #ffffff;
-        background: url('images/profile_image.jpeg') no-repeat center center;
+        /* background: url('images/profile_image.jpeg') no-repeat center center; */
+        background-image: url(${HeaderProfileImg});
+        background-repeat: no-repeat;
+        background-position: center;
         background-size: cover;
         top: calc(25% - 50px);
         left: calc(50% - 50px);

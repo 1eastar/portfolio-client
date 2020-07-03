@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 const Wrapper = styled.div`
-    min-height: 900px;
+    min-height: 1000px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,7 @@ const Wrapper = styled.div`
     }
     @media screen and (max-width: 600px) {
         padding-top: 50px;
+        min-height: 900px;
     }
 `;
 
