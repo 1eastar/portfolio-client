@@ -115,7 +115,7 @@ const Img = styled.img<{vertical: boolean}>`
 `;
 
 const MainContent = styled.div`
-    margin: 0 15px 80px 15px;
+    margin: 30px 15px 80px 15px;
 `;
 
 interface IProps {
@@ -166,8 +166,8 @@ const ExperienceDetail: React.FC<RouteComponentProps<IProps>> = ({ match }) => {
 
     return (
         <Wrapper>
-            <Echo height='50px'/>
-            <TextGrid textAlign={'center'} fontSize={{l:'45px', s:'27px'}} fontWeight={{l:'800', s:'700'}} letterSpacing={'-0.60px'} color={'#353535'} >
+            {/* <Echo height='50px'/> */}
+            <TextGrid textAlign={'center'} fontSize={{l:'45px', s:'27px'}} fontWeight={{l:'800', s:'700'}} letterSpacing={'-0.60px'} color={'#353535'} extraStyle="margin-top: 100px;" >
                 {post.title}
             </TextGrid>
             {post.content && <MainContent dangerouslySetInnerHTML={ {__html: post.content} } />}

@@ -10,6 +10,7 @@ const TextGrid = styled.div<{
     width?: {l?: string, lm?: string, m?: string, ms?: string, s?: string},
     color?: string,
     textAlign?: string,
+    extraStyle?: string,
 }>`
     width: ${p => p.width?.l};
     font-size: ${(p) => p.fontSize.l};
@@ -23,6 +24,7 @@ const TextGrid = styled.div<{
     line-height: ${p => p.lineHeight?.l};
     float: left;
     text-align: ${p => p.textAlign};
+    ${p => p.extraStyle? `${p.extraStyle}`:null}
 
     @media screen and (max-width: 1200px) {
         width: ${p => p.width?.lm};

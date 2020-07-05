@@ -17,9 +17,10 @@ import './modal.css';
 import HeaderMainImg from '../../asset/images/main_image.jpeg';
 import HeaderProfileImg from '../../asset/images/profile_image.jpeg';
 import HeaderMenuIcon from '../../asset/images/ic_menu_black.png';
+import Close from '../../asset/images/ic_close.png';
 
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{isOpen: boolean}>`
     position: fixed;
     left: 0;
     /* z-index: 100; */
@@ -51,7 +52,13 @@ const Wrapper = styled.div`
         width: 100%;
     }
     @media screen and (max-width: 600px) {
-        display: none;
+        background-color: #ffffff;
+        min-width: 270px;
+        position: fixed;
+        left: 0;
+        width: 65%;
+        height: 100%;
+        display: ${p => p.isOpen? 'block': 'none'};
         /* height: 25%; */
         /* display: flex;
         justify-content: flex-end;
@@ -78,6 +85,9 @@ const HeaderImgWrapper = styled.div`
     text-align: center;
     @media screen and (max-width: 1200px) {
         height: 80%;
+    }
+    @media screen and (max-width: 600px) {
+        height: 25%;
     }
 `;
 
@@ -169,6 +179,16 @@ const NaviWrapper = styled.div`
             /* left: 50%; */
         }
     }
+    @media screen and (max-width: 600px) {
+        display: block;
+        margin-top: 50px;
+        padding-right: 30px;
+        padding-left: 25%;
+        &::after {
+            top: calc(25% - 50px);
+            /* left: 50%; */
+        }
+    }
 `;
 
 const MainText = styled.div`
@@ -180,9 +200,12 @@ const MainText = styled.div`
     @media screen and (max-width: 1200px) {
         font-size: 28px;
     }
+    @media screen and (max-width: 600px) {
+        font-size: 20px;
+    }
 `;
 
-const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean}>`
+const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean, position?: string}>`
     float: left;
     font-size: 20px;
     font-weight: 500;
@@ -199,8 +222,15 @@ const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean}>`
         ${p=>p.isTag?'display: none':null};
         width: 20%;
         border-bottom: none;
-        text-align: center;
+        text-align: ${p => p.position==='right'? 'right':p.position==='left'?'left':'center'};
         margin: 35px 15px 0 15px;
+    }
+    @media screen and (max-width: 600px) {
+        display: block;
+        width: 100%;
+        border-bottom: solid 1px #dbdbdb;
+        text-align: end;
+        margin: 10px 0 10px;
     }
 `;
 
@@ -209,10 +239,13 @@ const IconWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly !important;
+    justify-content: center!important;
     position: absolute;
     left: 0;
     bottom: 50px;
+    &> * + * {
+        margin-left: 30px;
+    }
     @media screen and (max-height: 600px) {
         display: none;
     }
@@ -221,6 +254,43 @@ const IconWrapper = styled.div`
         align-items: center;
         width: 150px;
         height: 70px;
+    }
+    @media screen and (max-width: 600px) {
+        bottom: 50px;
+        top: auto;
+        width: 100%;
+    }
+`;
+
+const Overlay = styled.div<{isOpen: boolean}>`
+    display: none;
+    @media screen and (max-width: 600px) {
+        display: ${p => p.isOpen? 'block':'none'};
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+`;
+
+const CloseIcon = styled.div`
+    display: none;
+    @media screen and (max-width: 600px) {
+        display: block;
+        width: 30px;
+        height: 30px;
+        background-image: url(${Close});
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 11;
     }
 `;
 
@@ -277,30 +347,9 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
         }
     }
 
-    // if(isInfo){
-    //     return (
-    //         <>
-    //             <Modal
-    //                 isOpen={menuModal}
-    //                 // onAfterOpen={afterOpenModal}
-    //                 onRequestClose={CloseMenuModal}
-    //                 style={Styles}
-    //                 contentLabel="Example Modal"
-    //                 >
-    //                     <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
-    //             </Modal>
-    //             <WrapperForInfo>
-    //                 <MenuIcon onClick={()=>{
-    //                     CloseContactModal();
-    //                     OpenMenuModal();}}/>
-    //             </WrapperForInfo>
-    //         </>
-    //     )
-    // }
-
     return (
         <>
-            <Modal
+            {/* <Modal
                 isOpen={menuModal}
                 // closeTimeoutMS={2000}
                 // onAfterOpen={afterOpenModal}
@@ -311,8 +360,9 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                 // className="menu"
                 >
                     <Menu contactHandler={OpenContactModal} closeHandler={CloseMenuModal}/>
-            </Modal>
-            <Wrapper>
+            </Modal> */}
+            <Overlay isOpen={menuModal} onClick={CloseMenuModal}/>
+            <Wrapper isOpen={menuModal}>
                 <Modal
                     isOpen={contactModal}
                     // onAfterOpen={afterOpenModal}
@@ -326,10 +376,10 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     >
                         <ContactModal closeHandler={CloseContactModal}/>
                 </Modal>
+                <CloseIcon onClick={CloseMenuModal} />
                 <HeaderImgWrapper>
                     <MainText>
                         Web/APP <Orange>Developer</Orange>
-                        {/* 코딩하는 <Orange>예비 건물주</Orange> */}
                     </MainText>
                 </HeaderImgWrapper>
 
@@ -338,13 +388,15 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         navigator(history, '/portfolio');
                         setFocus(1);
                         CloseContactModal();
+                        CloseMenuModal();
                     }}>
                         Portfolio
                     </CategoryText>
-                    <CategoryText isFocus={focus===2} onClick={() => {
+                    <CategoryText position={'left'} isFocus={focus===2} onClick={() => {
                         navigator(history, '/posts');
                         setFocus(2);
                         CloseContactModal();
+                        CloseMenuModal();
                     }}>
                         Post
                     </CategoryText>
@@ -356,10 +408,11 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     }}>
                         Tags
                     </CategoryText>
-                    <CategoryText isFocus={focus===0} onClick={() => {
+                    <CategoryText position={'right'} isFocus={focus===0} onClick={() => {
                         navigator(history, '/');
                         setFocus(0);
                         CloseContactModal();
+                        CloseMenuModal();
                     }}>
                         About
                     </CategoryText>
@@ -367,6 +420,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         // navigator(history, '/');
                         // setFocus(4);
                         OpenContactModal();
+                        CloseMenuModal();
                     }}>
                         Contact
                     </CategoryText>
@@ -375,70 +429,8 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                         <IconGrid url={'ic_facebook_grey'} width={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} height={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} handler={()=>openLink('https://www.facebook.com/profile.php?id=100006896258332')} ishandler={true} />
                     </IconWrapper>
                 </NaviWrapper>
-                {/* <ButtonGrid 
-                    styleParams={{
-                        width: {large: '11%', lm: '14.5%', mid: '16%', ms: '18%', small: '0px'},
-                        height: {large: '70px', lm: '70px', ms: '60px', small: '50px'},
-                        borderRadius: '0px',
-                        backgroundColor: null,
-                        color: '#fcfcfc',
-                        border: '0px',
-                        fontWeight: '900',
-                        fontSize: {large: '28px', lm: '24px', mid: '20px', ms: '17px', small: '0px'},
-                        float: 'right',
-                        isMenu: true,
-                    }}
-                    text={'contact'}
-                    handler={OpenContactModal}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '11%', lm: '14.5%', mid: '16%', ms: '18%', small: '0%'},
-                        height: {large: '70px', lm: '70px', ms: '60px', small: '50px'},
-                        borderRadius: '0px',
-                        backgroundColor: null,
-                        color: '#fcfcfc',
-                        border: '0px',
-                        fontWeight: '900',
-                        fontSize: {large: '28px', lm: '24px', mid: '20px', ms: '17px', small: '0px'},
-                        float: 'right',
-                    }}
-                    text={'study'}
-                    handler={()=>{
-                        navigator(history, '/studies');
-                        CloseContactModal();}}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '13%', lm: '16.5%', mid: '17.5%', ms: '19%', small: '0%'},
-                        height: {large: '70px', lm: '70px', ms: '60px', small: '50px'},
-                        borderRadius: '0px',
-                        backgroundColor: null,
-                        color: '#fcfcfc',
-                        border: '0px',
-                        fontWeight: '900',
-                        fontSize: {large: '28px', lm: '24px', mid: '20px', ms: '17px', small: '0px'},
-                        float: 'right',
-                    }}
-                    text={'History'}
-                    handler={()=>{
-                        navigator(history, '/experiences');
-                        CloseContactModal();}}/>
-                <ButtonGrid 
-                    styleParams={{
-                        width: {large: '11%', lm: '14.5%', mid: '16%', ms: '18%', small: '00%'},
-                        height: {large: '70px', lm: '70px', ms: '60px', small: '50px'},
-                        borderRadius: '0px',
-                        backgroundColor: null,
-                        color: '#fcfcfc',
-                        border: '0px',
-                        fontWeight: '900',
-                        fontSize: {large: '28px', lm: '24px', mid: '20px', ms: '17px', small: '0px'},
-                        float: 'right',
-                    }}
-                    text={'Home'}
-                    handler={()=>{
-                        navigator(history, '/');
-                        CloseContactModal();}}/> */}
             </Wrapper>
+
             <MobileHeader isMenuModalOpen={menuModal}>
                 <MenuIcon onClick={()=>{
                     CloseContactModal();

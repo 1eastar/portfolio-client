@@ -76,7 +76,9 @@ const ImgLineWrapper = styled.div<{forMobile: boolean}>`
         ? css`
             display: none;
         `
-        : null};
+        : css`
+            display: block;
+        `};
     @media screen and (max-width: 600px) {
         width: 80%;
         margin: 0 auto;
@@ -85,7 +87,9 @@ const ImgLineWrapper = styled.div<{forMobile: boolean}>`
             ? css`
                 display: block;
             `
-            : null};
+            : css`
+                display: none;
+            `};
     }
 `;
 

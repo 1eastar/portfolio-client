@@ -14,6 +14,7 @@ import Icon from '../components/basic/Icon';
 import { openLink } from '../common/OpenLink';
 
 import '../components/basic/modal.css';
+import BG from '../asset/images/info_background.jpeg';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -35,7 +36,9 @@ const Wrapper = styled.div`
 `;
 
 const BackgroundImg = styled.div`
-    background: url('images/info_background.jpeg') no-repeat center center;
+    background-image: url(${BG});
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     position: absolute;
     opacity: 0.3;
@@ -107,12 +110,13 @@ const Info: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
             <TextBox>
                 안녕하세요,<br/> 누가 시켜서가 아닌 정말 하고 싶어서, 재미있어서 개발을 하는 대학생입니다.<br/><br/>
                 
-                우연히 Django를 접한 후 무언가를 직접 만드는 것이 재미있어 꾸준히 개발 공부를 하고 있습니다.<br/>
-                호호 할아버지가 되어서도 이제 취미가 된 개발을 계속하는 것이 꿈입니다<br/>
-                {/* '코딩하는 예비 건물주'에서 '코딩하는 건물주'가 되는 것이 꿈입니다!<br/> */}
+                Django로 개발을 시작하여 무언가를 직접 만드는 것이 재미있어 꾸준히 개발 공부를 하고 있습니다.<br/>
+                호기심도 많고 욕심도 많아 이것저것 만들어보고 직접 부딪히면서 다양한 경험을 해보고 싶습니다.<br/>
+                아직 안 해본 것은 많지만 '멍청하면 용감하다!'의 자세로 하루하루 나아가고 있고,
+                새로운 것을 공부하고 도전하는 것을 즐길줄 아는 사람이 되고자 합니다.<br/>
                 # Django / React / React-Native <br/>
                 <br/><br/>
-                웹사이트: <Highlight onClick={()=>navigator(history, '/')}>www.1eastar.com</Highlight><br/>
+                웹사이트: <Highlight onClick={()=>openLink('https://www.1eastar.com')}>www.1eastar.com</Highlight><br/>
                 Github: <Highlight onClick={()=>openLink('https://github.com/1eastar')}>github.com/1eastar</Highlight><br/>
                 Email: <Highlight style={{cursor: 'default'}} onClick={()=>{}}>ehdwls6703@gmail.com</Highlight><br/>
             </TextBox>

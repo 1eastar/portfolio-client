@@ -16,7 +16,7 @@ const Pagination: React.FC<{
     marginPagesDisplayed={2}
     pageRangeDisplayed={2}
     forcePage={nowpage - 1}
-    onPageChange={(page) => { callback(page.selected + 1); }}
+    onPageChange={(page) => { callback(page.selected + 1); window.scrollTo(0,0); }}
     containerClassName="pagination"
   />
 );
