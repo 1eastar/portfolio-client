@@ -16,6 +16,8 @@ import Experience from './pages/Experience';
 import ExperienceDetial from './pages/ExperienceDetail';
 import Study from './pages/Study';
 import StudyDetail from './pages/StudyDetail';
+import Auth from './pages/Auth';
+import StudyCompose from './pages/StudyCompose';
 
 const AppWrapper = styled.div`
   &,
@@ -47,15 +49,17 @@ const App: React.FC = () => {
     <AppWrapper>
       <BrowserRouter>
         <AuthContext.Provider value={{
-          user, setUser, auth, setAuth
-        }}>
+            user, setUser, auth, setAuth
+          }}>
           <Header/>
           <Switch>
             {/* <Route exact={true} path='/' component={Main} /> */}
             <Route exact={true} path='/' component={Info} />
+            <Route path='/auth' component={Auth} />
             <Route path='/portfolio' component={Experience} />
             <Route path='/experience/:id' component={ExperienceDetial} />
             <Route path='/posts' component={Study} />
+            <Route path='/postcompose' component={StudyCompose} />
             <Route path='/post/:id' component={StudyDetail} />
             {/* Not Found */}
             <Route component={() => <Redirect to="/" />} />

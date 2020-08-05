@@ -3,7 +3,7 @@ import { createContext } from 'react';
 interface IAuth {
   user: any,
   setUser: any,
-  auth: boolean,
+  auth: any,
   setAuth: any,
 }
 

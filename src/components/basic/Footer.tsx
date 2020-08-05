@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { measure } from '../../common/common';
+
+import { navigator } from '../../common/navigator';
+import AuthContext from '../../contexts/AuthContext';
 
 const Wrapper = styled.div`
     /* position: relative;
@@ -25,15 +29,24 @@ const Highlight = styled.span`
     margin-left: 6px;
 `;
 
+const ForClick = memo(styled.span``);
+
 interface IProps {
 
 }
 
 const Footer: React.FC<IProps> = () => {
+    const history = useHistory();
+    const { auth } = useContext(AuthContext);
+
+    const writeStudy = useCallback(() => {
+        if(auth) navigator(history, '/postcompose');
+        else navigator(history, '/auth');
+    }, [auth])
 
     return (
         <Wrapper>
-            © Copyright <Highlight>Dongjin Kang</Highlight>, All rights reserved.
+            <ForClick onClick={writeStudy}>©</ForClick> Copyright <Highlight>Dongjin Kang</Highlight>, All rights reserved.
         </Wrapper>
     )
 }

@@ -144,7 +144,7 @@ const NaviWrapper = styled.div`
     float: left;
     width: 100%;
     height: 75%;
-    margin-top: 50px;
+    margin-top: 80px;
     padding-right: 30px;
     padding-left: 25%;
     &::after {
@@ -181,7 +181,7 @@ const NaviWrapper = styled.div`
     }
     @media screen and (max-width: 600px) {
         display: block;
-        margin-top: 50px;
+        margin-top: 70px;
         padding-right: 30px;
         padding-left: 25%;
         &::after {
@@ -205,7 +205,7 @@ const MainText = styled.div`
     }
 `;
 
-const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean, position?: string}>`
+const CategoryText = styled.div<{isFocus: boolean, position?: string}>`
     float: left;
     font-size: 20px;
     font-weight: 500;
@@ -219,7 +219,6 @@ const CategoryText = styled.div<{isFocus: boolean, isTag?: boolean, position?: s
     border-bottom: solid 1px #dbdbdb;
     cursor: pointer;
     @media screen and (max-width: 1200px) {
-        ${p=>p.isTag?'display: none':null};
         width: 20%;
         border-bottom: none;
         text-align: ${p => p.position==='right'? 'right':p.position==='left'?'left':'center'};
@@ -363,19 +362,6 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
             </Modal> */}
             <Overlay isOpen={menuModal} onClick={CloseMenuModal}/>
             <Wrapper isOpen={menuModal}>
-                <Modal
-                    isOpen={contactModal}
-                    // onAfterOpen={afterOpenModal}
-                    onRequestClose={CloseContactModal}
-                    style={customStyles}
-                    shouldFocusAfterRender={false}
-                    shouldCloseOnOverlayClick={false}
-                    contentLabel="Example Modal"
-                    className="modal"
-                    ariaHideApp={false}
-                    >
-                        <ContactModal closeHandler={CloseContactModal}/>
-                </Modal>
                 <CloseIcon onClick={CloseMenuModal} />
                 <HeaderImgWrapper>
                     <MainText>
@@ -400,7 +386,7 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     }}>
                         Post
                     </CategoryText>
-                    <CategoryText isTag={true} isFocus={focus===-1} onClick={() => {
+                    <CategoryText position={'right'} isFocus={focus===-1} onClick={() => {
                         window.alert('준비 중입니다!');
                         // navigator(history, '/');
                         // setFocus(0);
@@ -408,21 +394,13 @@ const Header: React.FC<RouteComponentProps<IProps>> = ({ location }) => {
                     }}>
                         Tags
                     </CategoryText>
-                    <CategoryText position={'right'} isFocus={focus===0} onClick={() => {
+                    <CategoryText isFocus={focus===0} onClick={() => {
                         navigator(history, '/');
                         setFocus(0);
                         CloseContactModal();
                         CloseMenuModal();
                     }}>
                         About
-                    </CategoryText>
-                    <CategoryText isFocus={focus===4} onClick={() => {
-                        // navigator(history, '/');
-                        // setFocus(4);
-                        OpenContactModal();
-                        CloseMenuModal();
-                    }}>
-                        Contact
                     </CategoryText>
                     <IconWrapper>
                         <IconGrid url={'ic_github_grey'} width={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} height={{l:'40px', lm: '40px', m: '40px', ms: '35px', s: '30px'}} handler={()=>openLink('https://github.com/1eastar')} ishandler={true} float='left' />
